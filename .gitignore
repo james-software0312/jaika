@@ -1,0 +1,17 @@
+@core/storage
+@core/vendor
+@core/public/storage
+@core/node_modules
+@core/.env
+@core/.env.backup
+@core/.env.production
+@core/.phpunit.result.cache
+@core/Homestead.json
+@core/Homestead.yaml
+@core/auth.json
+@core/npm-debug.log
+@core/yarn-error.log
+@core/.fleet
+@core/.idea
+@core/.vscode
+assets/uploads

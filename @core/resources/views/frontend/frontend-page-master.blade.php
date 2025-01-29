@@ -1,0 +1,10 @@
+@include('frontend.partials.header')
+@if(isset($page_post))
+        @if(optional($page_post)->breadcrumb_status)
+            @include('frontend.partials.breadcrumb')
+        @endif
+    @else
+    @include('frontend.partials.breadcrumb')
+@endif
+@yield('content')
+@include('frontend.partials.footer')
