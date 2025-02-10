@@ -370,7 +370,6 @@
         let state = $('#state').val();
         let coupon = $('.discount-coupon input[name=coupon]').val();
         let selected_shipping_option = $('input[name=display_shipping_option]:checked').val();
-        console.log(selected_shipping_option);
         $('.lds-ellipsis').show();
 
         $.get('{{ route("frontend.checkout.calculate") }}', {

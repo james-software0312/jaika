@@ -166,7 +166,6 @@
                 type: 'POST',
                 data: data,
                 success: function (data) {
-                    console.log(data);
                     $('.lds-ellipsis').hide();
                     $('#cart-container').html(data['details']);
                     if (data['type'] == 'fail') {

@@ -19,11 +19,11 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title">{{__('All Products')}}</h4>
-                        @can('product-list')
+                        <!-- @can('product-list')
                         <div class="text-right">
                             <a href="{{ route('admin.products.new') }}" class="btn btn-primary">{{ __('Add New Product') }}</a>
                         </div>
-                        @endcan
+                        @endcan -->
                         @can('product-delete')
                         <x-bulk-action.dropdown />
                         @endcan

@@ -524,20 +524,19 @@ class CartAction {
     {
         $all_cart_items = CartHelper::getItems();
         $item_ids = array_keys($all_cart_items);
-        $cart_items_inventory_count = ProductInventory::select('id', 'product_id', 'stock_count')->whereIn('product_id', $item_ids)->get();
+        $cart_items_inventory_count = StockItemModel::select('id', 'product_id', 'quantity')->whereIn('product_id', $item_ids)->get();
         $products = Product::whereIn('id', $item_ids)->get();
 
         $cart_stock_details = [];
         $out_of_stock_errors = [];
-
+        
         foreach ($all_cart_items as $product_id => $product_items) {
             $cart_item_count = 0;
             $inventory_item = $cart_items_inventory_count->filter(function($item) use ($product_id) {
-                                return $item->product_id == $product_id;
+                return $item->product_id == $product_id;
                             })->first();
-
-            $stock_inventory_count = optional($cart_items_inventory_count->where('product_id', $product_id)->first())->stock_count ?? 0;
-
+                            
+            $stock_inventory_count = optional($cart_items_inventory_count->where('product_id', $product_id)->first())->quantity ?? 0;
             foreach ($product_items as $key => $product) {
                 $cart_item_count += isset($product['quantity']) ? $product['quantity'] : 0;
             }
@@ -575,6 +574,7 @@ class CartAction {
 
     public static function cleanCart($cart_info, $update_stock = false)
     {
+        
         $invalid_items = $cart_info;
         $items_to_remove = [];
         foreach ($invalid_items as $key => $cart_info_item) {
@@ -585,7 +585,7 @@ class CartAction {
                 $items_to_remove[$cart_info_item['item_id']] = $item_to_remove;
             }
         }
-
+        
         $all_cart_items = CartHelper::getItems();
         foreach ($items_to_remove as $id => $count) {
             // remove from cart

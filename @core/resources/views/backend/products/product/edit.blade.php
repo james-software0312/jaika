@@ -368,10 +368,7 @@
                 }
             });
 
-            let all_tags = {
-                !!json_encode($all_tags - > pluck('tag_text')) !!
-            };
-
+            let all_tags = {!! json_encode($all_tags->pluck('tag_text')) !!};
             let bindCarList = function() {
                 // Call TagsInput on the input, and set the typeahead source to our data
                 $('#tags').tagsinput({

@@ -468,7 +468,6 @@
     function updateQuantity(val,type){
 ;
         let unit = "{{$unit->unitconverter}}";
-        console.log(unit);
         if(type == "plus"){
             if($("#quantity").val() != 1) $("#quantity").val(parseInt(val) + parseInt(unit) );
             else $("#quantity").val(parseInt(unit));

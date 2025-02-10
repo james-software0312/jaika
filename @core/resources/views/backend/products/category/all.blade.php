@@ -143,7 +143,6 @@
                         Delete: {
                             label: "Delete",
                             action: function () {
-								console.log($node)
 								$("#delete_id").val($node.id);
                                 const modal = new bootstrap.Modal($('#DeleteModal'));
 								modal.show();

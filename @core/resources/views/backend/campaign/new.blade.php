@@ -253,20 +253,17 @@
                     }
 
                     let all_prices = $('.original_price');
-                    console.log(all_prices);
                     for (let i = 0; i < all_prices.length; i++) {
                         let price_container = $(all_prices[i]).closest('.col');
                         let final_price_container = price_container.next();
                         let product_price = $(all_prices[i]).val().trim();
                         let price_after_percentage = product_price - (product_price / 100 * fixed_percentage);
                         price_after_percentage = price_after_percentage.toFixed(2);
-                        console.log(price_after_percentage);
                         final_price_container.find('.campaign_price').val(price_after_percentage);
                     }
                 });
 
                 $('#fixed_date_sync_all').on('click', function () {
-                    console.log(111);
                     if ($('#set_fixed_date').is(':checked')) {
                         let from_date = $('#fixed_from_date').val();
                         let to_date = $('#fixed_to_date').val();

@@ -535,10 +535,8 @@ class FrontendController extends Controller
         // dd($slug);
         $product = Product::where('slug', $slug)->with('additionalInfo')->first();
         $unit = StockItemModel::where('product_id', $product->id)
-        ->select('unitconverter')
+        // ->select('unitconverter')
         ->first();
-        // $unitconverter = StockItemModel::where
-        // dd($product->inventory);
         if ($product) {
             $sub_category_arr = json_decode($product->sub_category_id, true);
 
@@ -703,7 +701,7 @@ class FrontendController extends Controller
     {
         $default_shipping_cost = CartAction::getDefaultShippingCost();
         $all_cart_items = CartHelper::getItems();
-
+        
         // validate stock count here ...
         CartAction::validateItemQuantity();
 

@@ -26,8 +26,11 @@
                     <span class="info">{{ $product->title }}</span>
                 </a>
             </div>
-            <div class="quant">
-                <span class="quant-num">{{ $cart_item['quantity'] }}</span>
+            <div class="quant d-flex"  style = "align-items: center;">
+                <!-- <button class="prd-quantity-btn btn btn-outline-info" data-button-type="minus"><i class="las la-minus"></i></button> &nbsp; -->
+                <span class="quant-num">{{ $cart_item['quantity'] }}</span>&nbsp;
+                <!-- <button class="prd-quantity-btn btn btn-outline-info" data-button-type="plus"><i class="las la-plus"></i></button> -->
+
             </div>
             <div class="price-box">
                 <span class="price">

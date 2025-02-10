@@ -11,8 +11,8 @@
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-5">
                 <div class="section-title-wrapper style-02-new">
-                    <h2 class="main-title">{{ $title }}</h2>
-                    <p class="sub-title">{{ $description }}</p>
+                    <h2 class="main-title">{{ __($title) }}</h2>
+                    <p class="sub-title">{{ __($description) }}</p>
                 </div>
             </div>
         </div>
@@ -22,11 +22,11 @@
             <div class="col-lg-12">
                 <div class="our-stor-isotop-btn-wrapper">
                     <ul class="our-stor-btn-list">
-                        <li data-filter="new-items" class="product_filter_style_two active">New items</li>
-                        <li data-filter="top-rated" class="product_filter_style_two">Top Rated</li>
-                        <li data-filter="top-selling" class="product_filter_style_two">Top Selling</li>
-                        <li data-filter="campaign" class="product_filter_style_two">Campaign</li>
-                        <li data-filter="discounted" class="product_filter_style_two">Discounted</li>
+                        <li data-filter="new-items" class="product_filter_style_two active">{{__("New items")}}</li>
+                        <li data-filter="top-rated" class="product_filter_style_two">{{__("Top Rated")}}</li>
+                        <li data-filter="top-selling" class="product_filter_style_two">{{__("Top Selling")}}</li>
+                        <li data-filter="campaign" class="product_filter_style_two">{{__("Campaign")}}</li>
+                        <li data-filter="discounted" class="product_filter_style_two">{{__("Discounted")}}</li>
                     </ul>
                 </div>
             </div>

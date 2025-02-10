@@ -47,14 +47,12 @@
                             version: el.attr("data-version")
                         },
                         success: function (data){
-                            console.log(data);
                             el.children().addClass('d-none');
                             if(data.msg != undefined && data.msg != ""){
                                 el.text(data.msg).removeClass("btn-warning").addClass("btn-"+data.type);
                             }
                         },
                         error: function (error) {
-                            console.log(error)
                         }
                     });
 

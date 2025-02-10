@@ -86,8 +86,8 @@ class MenuBuilderFrontendRender
         if (empty((array)$menu_item)){return;}
         $menu_item = (object) $menu_item ;
         $ptype =  property_exists($menu_item,'ptype') ? $menu_item->ptype : '';
-        $pname =  property_exists($menu_item,'pname') ? $menu_item->pname : '';
-
+        $ppname =  property_exists($menu_item,'pname') ? $menu_item->pname : '';
+        $pname = __($ppname);
         $output = '';
 
 
@@ -141,7 +141,7 @@ class MenuBuilderFrontendRender
 
 
             // get anchor data
-            $output .= $this->get_anchor_markup($title,[
+            $output .= $this->get_anchor_markup(__($title),[
                 'href' => url('/').'/'. $menu_slug ?? '' ,
                 'target' => $menu_item->antarget ?? '',
             ],$menu_item->icon ?? '');
@@ -286,7 +286,7 @@ class MenuBuilderFrontendRender
     private function get_anchor_markup(string $title,array $args, $icon = null)
     {
         $icon_markup = $icon ? "<i class='".$icon."'></i>" : '';
-        return "\t\t".'<a '.$this->get_attribute_string($args).'>'.$icon_markup.$title.'</a>'."\n";
+        return "\t\t".'<a '.$this->get_attribute_string($args).'>'.$icon_markup.__($title).'</a>'."\n";
     }
 
 

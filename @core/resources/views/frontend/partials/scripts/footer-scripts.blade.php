@@ -139,7 +139,6 @@
                 $('.magnific[data-key="'+key+'"]').closest('.single-main-image').find('.attribute_img').attr('src', source);
                 attribute_img_el.hide();
                 attribute_img_el.prev().show();
-                console.log([$('.magnific[data-key="'+key+'"]').closest('.single-main-image').find('.attribute_img'), source])
             })
 
             $('.attribute input[type=radio]').on('click', function () {

@@ -80,7 +80,7 @@
                     @else
                         <a href="#" data-attributes="{{ $item->attributes }}" data-id="{{ $item->id }}"
                            class="add_to_cart_ajax  add-to-cart-new">
-                            Add to Cart
+                            {{__("Add to Cart")}}
                         </a>
                     @endif
                 </div>

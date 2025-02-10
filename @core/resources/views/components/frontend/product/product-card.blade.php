@@ -53,7 +53,7 @@
                             <a href="{{ route('frontend.products.single', $product->slug) }}">{{ __('View Options') }} <i class="las la-eye"></i></a></li>
                     @else
                         <li>
-                            <a href="#" data-attributes="{{ $product->attributes }}" data-id="{{ $product->id }}" class="add_to_cart_ajax">{{ __('Add to Cart') }} <i class="las la-shopping-cart icon"></i></a>
+                            <a href="#" data-attributes="{{ $product->attributes }}" data-id="{{ $product->id }}" class="add_to_cart_ajax">{{ __('Add to Cart') }} {{ $product->id }} sdf <i class="las la-shopping-cart icon"></i></a>
                         </li>
                     @endif
                 </ul>

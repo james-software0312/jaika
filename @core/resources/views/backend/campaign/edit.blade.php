@@ -291,7 +291,6 @@
                     if ($('#set_fixed_percentage').is(':checked')) {
                         let percentage = $('#fixed_percentage_amount').val().trim();
                         let price_after_percentage = product_price - (product_price / 100 * percentage);
-                        console.log(price_after_percentage);
                         campaign_price_field.val(price_after_percentage);
                     }
                 });
