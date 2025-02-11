@@ -18,6 +18,7 @@ if(!file_exists('@core/.env')){
     $trail = 'install/index.php';
     $extra_slash = '';
     if (substr($url,-1,strlen($url)) !== '/'){
+        
         $extra_slash = '/';
     }
     echo '<a href="'.$url.$extra_slash.$trail.'">Go to install wizard</a>';
