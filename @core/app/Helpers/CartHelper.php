@@ -132,8 +132,9 @@ class CartHelper
 	 *
 	 * @return bool
 	 */
-    public static function add(int $id, $quantity, array $attributes = []){
-        return self::init()->add($id, $quantity, $attributes);
+    public static function add(int $id, $quantity, array $attributes = [], $unitconverter){
+        // dd($quantity);
+        return self::init()->add($id, $quantity, $attributes, $unitconverter);
     }
 
     /**

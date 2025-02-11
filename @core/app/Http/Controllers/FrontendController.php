@@ -701,7 +701,7 @@ class FrontendController extends Controller
     {
         $default_shipping_cost = CartAction::getDefaultShippingCost();
         $all_cart_items = CartHelper::getItems();
-        
+        // dd($all_cart_items);
         // validate stock count here ...
         CartAction::validateItemQuantity();
 
