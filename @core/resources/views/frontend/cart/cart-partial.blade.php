@@ -62,7 +62,7 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="quantity form-control item_quantity_info" type="number" min="1" max="10000000" data-id="{{ $cart_item['id'] }}" data-attr="{{ json_encode($cart_item['attributes']) }}" value="{{ $cart_item['quantity'] }}">
+                                            <input class="quantity form-control item_quantity_info" type="number" min="{{ $cart_item['unitconverter'] }}" max="10000000" data-id="{{ $cart_item['id'] }}" data-attr="{{ json_encode($cart_item['attributes']) }}"  step="{{ $cart_item['unitconverter'] }}" value="{{ $cart_item['quantity'] }}">
                                         </div>
                                     </td>
                                     <td>

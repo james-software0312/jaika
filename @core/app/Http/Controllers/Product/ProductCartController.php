@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Product\Product;
+use App\StockItemModel;
 use App\Helpers\FlashMsg;
 use App\Action\CartAction;
 use App\Helpers\CartHelper;
@@ -36,8 +37,8 @@ class ProductCartController extends Controller
             'quantity' => 'required|numeric|min:1',
             // 'product_attributes' => 'nullable|array',
         ]);
-
         $product = Product::find($request->product_id);
+        $stock = StockItemModel::where('product_id', $request->product_id)->first();
         $attributes = [];
         $req_attributes = [];
         $product_price = 0;
@@ -54,8 +55,11 @@ class ProductCartController extends Controller
         //     $product_price = optional($product)->sale_price ?? 0;
         //     $attributes['price'] = $product_price + array_sum($additional_price_arr);
         // }
-
-        $remaining_quantity = $request->quantity;
+        if($request->quantity == 1) {
+            $remaining_quantity = $stock->unitconverter*$request->quantity;
+        }else {
+            $remaining_quantity = $request->quantity;
+        }
 
         // if item is in campaign, add number of campaign quantity in the cart
         $campaign = CartAction::getCampaignQuantity($request->product_id, $remaining_quantity);
@@ -67,7 +71,8 @@ class ProductCartController extends Controller
             CartHelper::add(
                 $request->product_id,
                 $campaign['campaign_quantity'],
-                $attributes
+                $attributes,
+                $stock->unitconverter
             );
             
             $remaining_quantity = $campaign['remaining_quantity'];
@@ -85,7 +90,8 @@ class ProductCartController extends Controller
                 CartHelper::add(
                     $request->product_id,
                     $available_quantity,
-                    $attributes
+                    $attributes,
+                    $stock->unitconverter
                 );
             }
         }
