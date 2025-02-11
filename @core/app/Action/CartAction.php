@@ -524,9 +524,8 @@ class CartAction {
     {
         $all_cart_items = CartHelper::getItems();
         $item_ids = array_keys($all_cart_items);
-        $cart_items_inventory_count = StockItemModel::select('id', 'product_id', 'quantity')->whereIn('product_id', $item_ids)->get();
+        $cart_items_inventory_count = StockItemModel::select('id', 'product_id', 'quantity','unitconverter')->whereIn('product_id', $item_ids)->get();
         $products = Product::whereIn('id', $item_ids)->get();
-
         $cart_stock_details = [];
         $out_of_stock_errors = [];
         
@@ -540,7 +539,7 @@ class CartAction {
             foreach ($product_items as $key => $product) {
                 $cart_item_count += isset($product['quantity']) ? $product['quantity'] : 0;
             }
-
+            $stock_inventory_count = $stock_inventory_count*$cart_items_inventory_count[0]['unitconverter'];
             $cart_stock_details[] = [
                 'item_id' => $product_id,
                 'cart_count' => $cart_item_count,
@@ -548,7 +547,7 @@ class CartAction {
                 'status' => $stock_inventory_count >= $cart_item_count ? 'valid' : 'invalid',
             ];
         }
-
+        
         // generate errors messages
         foreach ($cart_stock_details as $item_info) {
             if ($item_info['stock_count'] == 0) {
@@ -556,13 +555,12 @@ class CartAction {
             } else {
                 if ($item_info['status'] == 'invalid') {
                     $out_of_stock_errors[] = __('You asked for') 
-                                                . ' ' . $item_info['cart_count'] . ' ' . __('units of') 
-                                                . ' ' . optional($products->find($item_info['item_id']))->title . __(', but only')
-                                                . ' ' . $item_info['stock_count'] . ' ' . __('items available in stock');
+                    . ' ' . $item_info['cart_count'] . ' ' . __('units of') 
+                    . ' ' . optional($products->find($item_info['item_id']))->title . __(', but only')
+                    . ' ' . $item_info['stock_count'] . ' ' . __('items available in stock');
                 }
             }
         }
-
         // keep only available quantity in the cart
         CartAction::cleanCart($cart_stock_details);
 

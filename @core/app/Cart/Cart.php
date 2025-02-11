@@ -252,7 +252,7 @@ class Cart
 	 *
 	 * @return bool
 	 */
-	public function add($id, $quantity = 1, $attributes = [])
+	public function add($id, $quantity = 1, $attributes = [], $unitconverter)
 	{
 		$quantity = (preg_match('/^\d+$/', $quantity)) ? $quantity : 1;
 		$attributes = (is_array($attributes)) ? array_filter($attributes) : [$attributes];
@@ -280,6 +280,7 @@ class Cart
 			'quantity'   => ($quantity > $this->itemMaxQuantity && $this->itemMaxQuantity != 0) ? $this->itemMaxQuantity : $quantity,
 			'hash'       => $hash,
 			'attributes' => $attributes,
+			'unitconverter' => $unitconverter
 		];
 
 		$this->write();
