@@ -254,27 +254,29 @@ class Cart
 	 */
 	public function add($id, $quantity = 1, $attributes = [], $unitconverter)
 	{
+
 		$quantity = (preg_match('/^\d+$/', $quantity)) ? $quantity : 1;
 		$attributes = (is_array($attributes)) ? array_filter($attributes) : [$attributes];
 		$hash = md5(json_encode($attributes));
 
 		if (count($this->items) >= $this->cartMaxItem && $this->cartMaxItem != 0) {
 			return false;
+			
 		}
-
+		
 		if (isset($this->items[$id])) {
 			foreach ($this->items[$id] as $index => $item) {
 				if ($item['hash'] == $hash) {
+					// dd($unitconverter);
 					$this->items[$id][$index]['quantity'] += $quantity;
 					$this->items[$id][$index]['quantity'] = ($this->itemMaxQuantity < $this->items[$id][$index]['quantity'] && $this->itemMaxQuantity != 0) ? $this->itemMaxQuantity : $this->items[$id][$index]['quantity'];
-
+					$this->items[$id][$index]['unitconverter'] = $unitconverter; 
+					// dd($this->items);
 					$this->write();
-
 					return true;
 				}
 			}
 		}
-
 		$this->items[$id][] = [
 			'id'         => $id,
 			'quantity'   => ($quantity > $this->itemMaxQuantity && $this->itemMaxQuantity != 0) ? $this->itemMaxQuantity : $quantity,
