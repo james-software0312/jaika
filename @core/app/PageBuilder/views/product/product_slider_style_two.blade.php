@@ -3,7 +3,8 @@
         <div class="row justify-content-center">
             <div class="col-lg-5">
                 <div class="section-title-wrapper">
-                    <h2 class="main-title">{{$section_title}}</h2>
+                    {{-- <h2 class="main-title">{{$section_title}}</h2>  NEW DESIGN    NOWOŚCI --}}
+                    <h2 class="main-title">{{__('NEW DESIGN')}}</h2>
                 </div>
             </div>
         </div>

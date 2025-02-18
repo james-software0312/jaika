@@ -8,8 +8,8 @@
     $campaign_percentage = $campaign_product ? getPercentage($item->sale_price, $sale_price) : false;
 @endphp
 
-<div class="col-sm-6 col-md-4 col-lg-3 new">
-    <div class="single-our-store-wrapper single-new-design-wrapper single-product-item">
+<div class="col-sm-6 col-md-4 col-lg-3 gap-5 new">
+    <div class="single-our-store-wrapper single-new-design-wrapper single-product-item" >
         <div class="product-img-box">
             @if(!empty($item->badge))
             <span class="sale">{{$item->badge}}</span>

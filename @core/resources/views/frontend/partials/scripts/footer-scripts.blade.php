@@ -218,6 +218,7 @@
                 if(parserPrice){
                     $('#productview .main_price').text(data['price']);
                 }
+                $('#add_to_cart_info .quantity').attr('value', data['unitconverter']);
                 $('#productview .product_category').text(data['category']);
                 $('#productview .product_category').attr('href', data['categoryUrl']);
                 $('#productview .product-img img').attr('src', data['image']);
@@ -525,6 +526,7 @@
                 data: {slug: slug},
                 success: function (data) {
                     if (data) {
+                        
                         $('.lds-ellipsis').hide(300);
                         $('#productview .cart-option').html(data);
                     }

@@ -28,6 +28,25 @@
 
 @endsection 
 @section('content')
+<style>
+  .zoom-container {
+        position: relative;
+        width: 400px; /* Set your desired width */
+        height: 400px; /* Set your desired height */
+        overflow: hidden;
+    }
+    .zoom-image {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.1s ease-out;
+        transform-origin: center;
+    }
+    .zoom-container:hover .zoom-image {
+        transform: scale(2); /* Zoom level */
+    }
+</style>
 
     <input id="product-image" type="hidden" value="{{ get_attachment_image_by_id($product->image)["img_url"] ?? null }}">
 
@@ -37,7 +56,7 @@
             <div class="col-lg-6">
                 <div class="product-view-wrap">
                     <div class="shop-details-gallery-slider" id="myTabContent">
-                        <a class="single-main-image" href="{{ get_image_url($product->image) }}" data-key="1" target="_blank">
+                        <div class="single-main-image zoom-container" href="{{ get_image_url($product->image) }}" data-key="1" target="_blank">
                             @if(!empty($product->badge))
                                 <span class="sale">{{$product->badge}}</span>
                             @endif
@@ -45,8 +64,8 @@
                                 <i class="las la-search-plus"></i>
                             </a> -->
 
-                            {!! render_image_markup_by_attachment_id($product->image, 'img-fluid', 'thumbnail') !!}
-                        </a>
+                            {!! render_image_markup_by_attachment_id($product->image, 'img-fluid zoom-image', 'thumbnail') !!}
+                        </div>
                         @php
                             $product_image_gallery = $product->product_image_gallery && $product->product_image_gallery != 'null'
                                                         ? json_decode($product->product_image_gallery, true)
@@ -173,9 +192,9 @@
                                 </div>
                                 <div class="cart-option mt-4">
                                     <a href="#" data-id="{{ $product->id }}" class="cart add_to_cart">{{ __('add to cart') }}</a>
-                                    <a href="#" data-id="{{ $product->id }}" class="cart add_to_wishlist">{{ __('wishlist') }}</a>
+                                    {{-- <a href="#" data-id="{{ $product->id }}" class="cart add_to_wishlist">{{ __('wishlist') }}</a>
                                     <a href="#" data-id="{{ $product->id }}" class="cart add_to_compare_ajax">{{ __('Compare') }}</a>
-                                    <a href="#" data-id="{{ $product->id }}" class="cart buy_now">{{ __(key: 'Buy Now') }}</a>
+                                    <a href="#" data-id="{{ $product->id }}" class="cart buy_now">{{ __(key: 'Buy Now') }}</a> --}}
                                 </div>
                             @endif
                         </div>
@@ -434,6 +453,38 @@
 
     showAndHideClearButton($(".checkbox:checked").length);
 
+
+    document.querySelectorAll('.zoom-container').forEach(container => {
+        const zoomImage = container.querySelector('.zoom-image');
+
+        container.addEventListener('mousemove', (e) => {
+            const { left, top, width, height } = container.getBoundingClientRect();
+            const x = ((e.pageX - left) / width) * 100;
+            const y = ((e.pageY - top) / height) * 100;
+
+            zoomImage.style.transformOrigin = `${x}% ${y}%`;
+        });
+
+        container.addEventListener('mouseleave', () => {
+            zoomImage.style.transformOrigin = 'center';
+        });
+    });
+
+document.querySelectorAll('.zoom-container').forEach(container => {
+    const zoomImage = container.querySelector('.zoom-image');
+
+    container.addEventListener('mousemove', (e) => {
+        const { left, top, width, height } = container.getBoundingClientRect();
+        const x = ((e.pageX - left) / width) * 100;
+        const y = ((e.pageY - top) / height) * 100;
+
+        zoomImage.style.transformOrigin = `${x}% ${y}%`;
+    });
+
+    container.addEventListener('mouseleave', () => {
+        zoomImage.style.transformOrigin = 'center';
+    });
+});
     $(document).on("click",".clear-attributes",function (){
         $(".checkbox").removeAttr("checked");
         $("#price").text(site_currency_symbol + parseFloat($("#price").data("main-price")).toFixed(2));

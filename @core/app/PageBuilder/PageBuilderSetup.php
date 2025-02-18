@@ -149,6 +149,8 @@ class PageBuilderSetup
     {
         $widget_class = $args['namespace'];
         $instance = new $widget_class($args);
+        // dd($args['name']);
+        // if ($args['id'] == 73) dd($instance);
         if ($instance->enable()) {
             return $instance->frontend_render();
         }
@@ -216,12 +218,15 @@ class PageBuilderSetup
         $output = '';
         $all_widgets = PageBuilder::where(['addon_page_type' => $page_type, 'addon_page_id' => $page_id])->orderBy('addon_order', 'asc')->get();
         foreach ($all_widgets as $widget) {
-            $output .= self::render_widgets_by_name_for_frontend([
+            // if($widget->id ==64) dd($widget);
+            // if ($widget->id !=73 && $widget->id !=59 && $widget->id !=61 && $widget->id !=64 && $widget->id !=65 && $widget->id !=66 && $widget->id !=67)dd($widget);
+            if ($widget->id !=61 && $widget->id !=65 && $widget->id !=66 && $widget->id !=67 && $widget->id !=68) $output .= self::render_widgets_by_name_for_frontend([
                 'name' => $widget->addon_name,
                 'namespace' => $widget->addon_namespace,
                 'id' => $widget->id,
                 'column' => $args['column'] ?? false
             ]);
+            else $output .= "<br><br>";
         }
         return $output;
     }

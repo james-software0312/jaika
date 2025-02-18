@@ -31,12 +31,17 @@ class MenuBuilderFrontendRender
         if(is_null($menu_details_from_db)){
              return $output;
         }
-        $menu_data = json_decode($menu_details_from_db->content);
+        $menu_data = json_decode($menu_details_from_db->content);   
         $this->page_id = 1;
 
         if (count((array)$menu_data) > 0){
             foreach ($menu_data as $menu_item){
                 $this->page_id++;
+                if($this->page_id == 2){
+                    $output .= '<li class = ""><a href="https://web.eska.tech/website">Strona główna</a></li>';
+                    
+                    continue;
+                }
                 $output .= $this->render_menu_item($menu_item,$this->page_id,$default_lang);
             }
         }
@@ -82,7 +87,7 @@ class MenuBuilderFrontendRender
     private function render_menu_item($menu_item, int $page_id, $default_lang)
     {
         $attributes_string = property_exists($menu_item,'children') ? ['class' => ['menu-item-has-children']]  : [];
-
+        
         if (empty((array)$menu_item)){return;}
         $menu_item = (object) $menu_item ;
         $ptype =  property_exists($menu_item,'ptype') ? $menu_item->ptype : '';
@@ -108,7 +113,9 @@ class MenuBuilderFrontendRender
                 'href' => str_replace('@url',url('/'),$menu_item->purl),
                 'target' => $menu_item->antarget ?? '',
             ],$menu_item->icon ?? '');
-
+            
+            // dd($output);
+            // if($title =="Home") return $output;
         }
         elseif ($ptype === 'product_category'){
             $model = ProductCategory::where('id',$menu_item->pid)->first();
@@ -263,7 +270,7 @@ class MenuBuilderFrontendRender
             }
         }
         //check it has children
-        if (property_exists($menu_item,'children')){
+        if (property_exists($menu_item,'children') && $title !="Home"){
             $output .= $this->render_children_item($menu_item->children,$default_lang);
         }
 

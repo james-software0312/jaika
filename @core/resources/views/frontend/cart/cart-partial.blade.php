@@ -60,9 +60,11 @@
                                             <span class="price">{{ float_amount_with_currency_symbol($price) }}</span>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div class="input-group">
-                                            <input class="quantity form-control item_quantity_info" type="number" min="{{ $cart_item['unitconverter'] }}" max="10000000" data-id="{{ $cart_item['id'] }}" data-attr="{{ json_encode($cart_item['attributes']) }}"  step="{{ $cart_item['unitconverter'] }}" value="{{ $cart_item['quantity'] }}">
+                                    <td style="width:25%;">
+                                        <div class="input-group w-100 " style="gap:20px;" >
+                                                <button data-id="{{ $cart_item['id'] }}" class="prd-quantity-btn btn btn-outline-info" data-button-type="minus" data-unit = "{{ $cart_item['unitconverter'] }}"><i class="las la-minus" ></i></button>
+                                                <input disabled class="quantity form-control item_quantity_info" type="text" min="{{ $cart_item['unitconverter'] }}" max="10000000" data-id="{{ $cart_item['id'] }}" data-attr="{{ json_encode($cart_item['attributes']) }}"  step="{{ $cart_item['unitconverter'] }}" value="{{ $cart_item['quantity'] }}">
+                                                <button data-id="{{ $cart_item['id'] }}" class="prd-quantity-btn btn btn-outline-info" data-button-type="plus" data-unit = "{{ $cart_item['unitconverter'] }}"><i class="las la-plus" data-id="{{ $cart_item['id'] }}"></i></button>
                                         </div>
                                     </td>
                                     <td>
@@ -124,3 +126,32 @@
         </div>
     </div>
 </div>
+
+<script>
+
+$(document).on("click",".prd-quantity-btn",function (){
+        var quantityInput = $('.item_quantity_info[data-id="' + $(this).data("id") + '"]');
+        if($(this).data("button-type") === "minus"){
+            updateQuantity(quantityInput.val(),$(this).data("button-type"),$(this).data("unit"),$(this).data("id"), quantityInput);
+        }else if($(this).data("button-type") === "plus"){
+            updateQuantity(quantityInput.val(),$(this).data("button-type"),$(this).data("unit"),$(this).data("id"), quantityInput);
+        }
+    });
+
+    function updateQuantity(val,type, unit, id, quantityInput){
+
+
+        if(type == "plus"){
+            if(quantityInput.val() != 1 ) quantityInput.val(parseInt(val) + parseInt(unit) );
+            else quantityInput.val(parseInt(unit));
+            
+        }else if(type == "minus"){
+            if(parseInt(val) > parseInt(unit)){
+                quantityInput.val(parseInt(val) - parseInt(unit));
+            }else{
+                quantityInput.val(parseInt(unit));
+            }
+        }
+
+    }
+</script>

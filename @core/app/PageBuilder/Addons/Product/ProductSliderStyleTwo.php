@@ -134,23 +134,23 @@ class ProductSliderStyleTwo extends PageBuilderBase
         $section_subtitle = SanitizeInput::esc_html($settings['section_subtitle']);
         $order = SanitizeInput::esc_html($settings['order']);
         $order_by = SanitizeInput::esc_html($settings['order_by']);
-        $items = SanitizeInput::esc_html($settings['items_count']);
+        // $items = SanitizeInput::esc_html($settings['items_count']);
+        $items = 50;
+        // dd($items);
         $padding_top = SanitizeInput::esc_html($settings['padding_top']);
         $padding_bottom = SanitizeInput::esc_html($settings['padding_bottom']);
-        $product_items = $settings['items'] ?? [];
+        $product_items = Product::select('id');
         $product_categories = $settings['product_categories'] ?? [];
-
         $products = Product::query()->withAvg('rating', 'rating')->with(['inventory', 'campaignProduct']);
-
         if (!empty($product_items)) {
             $products->whereIn('id', $product_items);
         }
-
+        
         if (!empty($product_categories)) {
-            $products->whereIn('category_id', $product_categories);
-        }
-
-        $products->where(['status' => 'publish']);
+                $products->whereIn('category_id', $product_categories);
+            }
+            
+            $products->where(['status' => 'publish']);
 
         if ($order_by === 'rating') {
             $products = $products->with(['ratings','campaignProduct'])->get();
@@ -165,7 +165,6 @@ class ProductSliderStyleTwo extends PageBuilderBase
         if (!empty($items)) {
             $all_products = $all_products->take($items);
         }
-
         $output = '';
 
         foreach ($all_products as $item) {
@@ -190,6 +189,11 @@ class ProductSliderStyleTwo extends PageBuilderBase
 
         $price = $price > 0 ? float_amount_with_currency_symbol($price) : '';
         $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' . float_amount_with_currency_symbol($sale_price) . '</li><li class="price"><del>' . $price . '</del></li></ul></div>';
+        // if($sale_price < $price) {
+        //     $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' . float_amount_with_currency_symbol($sale_price) . '</li><li class="price"><del>' . $price . '</del></li></ul></div>';
+        // } else {
+        //     $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' . float_amount_with_currency_symbol($sale_price) . '</li></ul></div>';
+        // }
 
         $add_to_cart_markup = "";
         if ($item->id) {

@@ -87,7 +87,7 @@ $page_post = $page_post ?? (object)['footer_variant' => null];
             <div class="cart-option">
                 <div class="d-flex add_to_cart_info">
                     <div class="input-group">
-                        <input class="quantity form-control" type="number" min="1" max="10000000" value="1">
+                        {{-- <input class="` form-control" type="number" min="1" max="10000000" value="1"> --}}
                     </div>
                     <div class="add-cart-btn">
                         <a href="#" class="add-to-cart add_to_cart modal_add_to_cart">{{ __('add to cart') }}</a>

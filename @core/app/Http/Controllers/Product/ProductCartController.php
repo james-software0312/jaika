@@ -85,6 +85,7 @@ class ProductCartController extends Controller
             // adjust attribute to normal product
             unset($attributes['type']);
             $attributes['price'] = $product_price + array_sum($additional_price_arr);
+
             if ($available_quantity > 0) {
                 CartHelper::add(
                     $request->product_id,

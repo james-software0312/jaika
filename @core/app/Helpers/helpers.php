@@ -79,7 +79,7 @@ function render_image_markup_by_attachment_id($id, $class = null, $size = 'full'
     $image_details = get_attachment_image_by_id($id, $size);
     if (!empty($image_details)) {
         $class_list = !empty($class) ? 'class="' . $class . '"' : '';
-        $output = '<img src="' . $image_details['img_url'] . '" ' . $class_list . ' alt="' . $image_details['img_alt'] . '"/>';
+        $output = '<img src="' . $image_details['img_url'] . '" ' . $class_list . ' width = "100%"  alt="' . $image_details['img_alt'] . '"/>';
     }
     return $output;
 }

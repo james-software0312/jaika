@@ -80,7 +80,6 @@ class WidgetBuilderSetup
     }
 
     public static function render_widgets_by_name_for_frontend($args){
-        //widget_name
         $widget_class = 'App\WidgetsBuilder\Widgets\\'.$args['name'];
         $instance = new $widget_class($args);
         return $instance->frontend_render();

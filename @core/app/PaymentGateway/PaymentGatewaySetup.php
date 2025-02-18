@@ -71,21 +71,21 @@ class PaymentGatewaySetup
     public static function gateway_list()
     {
         return [
-            'paypal',
-            'mollie',
-            'paytm',
-            'stripe',
-            'razorpay',
-            'flutterwave',
-            'paystack',
-            'midtrans',
-            'payfast',
-            'cashfree',
-            'instamojo',
-            'marcadopago',
-            'manual_payment',
+            // 'paypal',
+            // 'mollie',
+            // 'paytm',
+            // 'stripe',
+            // 'razorpay',
+            // 'flutterwave',
+            // 'paystack',
+            // 'midtrans',
+            // 'payfast',
+            // 'cashfree',
+            // 'instamojo',
+            // 'marcadopago',
+            // 'manual_payment',
             'bank_payment',
-            'cheque_payment',
+            // 'cheque_payment',
         ];
     }
 

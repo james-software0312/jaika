@@ -197,11 +197,11 @@
                                         <a href="{{ route('admin.country.all') }}">{{ __('Country') }}</a>
                                     </li>
                                 @endcan
-                                @can('state-list')
+                                {{-- @can('state-list')
                                     <li class="{{ active_menu('admin-home/state') }}">
                                         <a href="{{ route('admin.state.all') }}">{{ __('State') }}</a>
                                     </li>
-                                @endcan
+                                @endcan --}}
                             </ul>
                         </li>
                     @endcanany

@@ -121,15 +121,18 @@ class HeaderSliderTwo extends PageBuilderBase
         $all_settings = $this->get_settings();
 
         $this->args['settings'] = RepeaterField::remove_default_fields($all_settings);
+        // dd($this->args['settings']);
         foreach ($this->args['settings'] as $key => $setting){
             if (is_array($setting)){
                 $this->args['repeater'] = $setting;
                 $array_lang_item = $setting[array_key_last($setting)];
+                // dd($array_lang_item);
                 if (!empty($array_lang_item) && is_array($array_lang_item) && count($array_lang_item) > 0) {
                     foreach ($array_lang_item as $index => $value) {
                         $output .= $this->render_slider_markup($index); // for multiple array index
                     }
-                } else {
+                } 
+                else {
                     $output .= $this->render_slider_markup(); // for only one index of array
                 }
             }
@@ -151,6 +154,7 @@ HTML;
         $button_text = $this->get_repeater_field_value('button_text', $index);
         $button_url = $this->get_repeater_field_value('button_url', $index);
         $button_icon = $this->get_repeater_field_value('button_icon', $index);
+        // dd($index); 
         $background_image = render_background_image_markup_by_attachment_id($this->get_repeater_field_value('background_image', $index));
         $padding_top = SanitizeInput::esc_html($settings['padding_top']);
         $padding_bottom = SanitizeInput::esc_html($settings['padding_bottom']);
@@ -164,7 +168,7 @@ HTML;
         return <<<HTML
         <div class="header-area header-bg" {$background_image} data-padding-top="{$padding_top}" data-padding-bottom="{$padding_bottom}"> 
             <div class="container nav-container">
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-lg-12">
                         <div class="header-inner-content-index-02">
                             <p class="info" style="color:{$title_color}">{$subtitle}</p>
@@ -172,7 +176,7 @@ HTML;
                             {$button_markup}
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 HTML;

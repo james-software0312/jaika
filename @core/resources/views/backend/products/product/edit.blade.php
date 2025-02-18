@@ -135,7 +135,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card mb-3">
+                        {{-- <div class="card mb-3">
                             <div class="card-body">
                                 <h5 class="mb-5 mt-3">{{ __('Stock Information') }}</h5>
                                 <div class="form-group">
@@ -147,7 +147,7 @@
                                     <input type="number" id="stock_count" name="stock_count" class="form-control" required value="{{ optional($product->inventory)->stock_count ?? 0 }}">
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="mb-5 mt-3">{{ __('More Information') }}</h5>
@@ -205,13 +205,24 @@
                                 </div>
                             </div> --}}
                             <div id="attribute_container"></div>
-                            <div class="form-group">
-                                <label for="category_id">{{ __('Category') }}</label>
-                                <select class="form-control" name="category_id" id="category_id">
-                                    @foreach ($all_category as $category)
-                                    <option value="{{ $category->id }}" @if($product->category_id == $category->id) selected @endif>{{ $category->title }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="category_id">{{ __('Category') }}</label>
+                                        <select class="form-control" name="category_id" id="category_id">
+                                            @foreach ($all_category as $category)
+                                            <option value="{{ $category->id }}" @if($product->category_id == $category->id) selected @endif>{{ $category->title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="stock_count">{{ __('Items in Stock') }}</label>
+                                        <input disabled type="text" id="stock_count" name="stock_count" class="form-control"  value="{{ $stock->quantity }}">
+                                    </div>
+                                </div>
+
                             </div>
                             <span class="text-secondary">({{ __('Press ') }} <kbd>{{ __('Ctrl') }}</kbd> {{ __(' and Click to select multiple options') }})</span>
                             <div class="form-group">

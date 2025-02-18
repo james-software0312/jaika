@@ -72,8 +72,9 @@ class FrontendController extends Controller
         $page = StaticOption::where("option_name","home_page_identity")->select("id","option_value")->first();
         $default = StaticOption::where("option_name","default_home_page")->select("id","option_value")->first();
         if (!empty($page->option_value) && $default->option_value == "on") {
-            $page_post = Page::where('id', $page->option_value)->first();
-
+            // if you want to other theme, you have to use $page->option_value instead of 7
+            $page_post = Page::where('id', 7)->first();
+            // dd($page_post);
             return view('frontend.pages.dynamic-single', compact('page_post'));
         }
 
@@ -689,9 +690,9 @@ class FrontendController extends Controller
     public function getProductAttributeHtml(Request $request)
     {
         $product = Product::where('slug', $request->slug)->first();
-
+        $stock = StockItemModel::where('product_id', $product->id)->first();
         if ($product) {
-            return view('frontend.partials.product-attributes', compact('product'));
+            return view('frontend.partials.product-attributes', compact('product', 'stock'));
         }
     }
 

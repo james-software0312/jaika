@@ -192,13 +192,14 @@ class ProductController extends Controller
     {
         $contact_users = ContactModel::where('status', 2)->get();
         $product = Product::where('id', $item->id)->with('additionalInfo', 'tags', 'inventory')->first();
+        $stock = StockItemModel::where('product_id', $item->id)->first();
         $all_category = ProductCategory::all();
         $all_sub_category = ProductSubCategory::all();
         $all_attribute = ProductAttribute::all()->groupBy('title')->map(fn($query) => $query[0]);
         $all_tags = Tag::all();
         $all_size = WHSize::all();
         $all_color = WHColor::all();
-        return view(self::BASE_URL.'edit', compact('product', 'all_category', 'all_sub_category', 'all_attribute', 'all_tags', 'all_color', 'all_size', 'contact_users'));
+        return view(self::BASE_URL.'edit', compact('product', 'all_category', 'all_sub_category', 'all_attribute', 'all_tags', 'all_color', 'all_size', 'contact_users', 'stock'));
     }
 
     /**
@@ -227,9 +228,7 @@ class ProductController extends Controller
             'tags' => 'nullable|string',
             'attribute_id' => 'nullable|array',
             'attribute_selected' => 'nullable|array',
-            'attribute_name' => 'nullable|array',
-            'sku' => 'required|string|max:191',
-            'stock_count' => 'required|string|max:191',
+            'attribute_name' => 'nullable|array'
         ]);
         $stockItem = StockItemModel::where('product_id', $item->id)->firstOrFail();
         $data = $request->all();
@@ -312,21 +311,21 @@ class ProductController extends Controller
                 $this->updateAdditionalInformation($item->id, $request);
             }
 
-            $inventory = ProductInventory::where('product_id', $item->id)->first();
+            // $inventory = ProductInventory::where('product_id', $item->id)->first();
 
-            if ($inventory) {
-                $inventory->update([
-                    'sku' => $request->sku,
-                    'stock_count' => $request->stock_count,
-                ]);
-            } else {
-                ProductInventory::create([
-                    'product_id' => $item->id,
-                    'sku' => $request->sku,
-                    'stock_count' => $request->stock_count,
-                    'sold_count' => 0,
-                ]);
-            }
+            // if ($inventory) {
+            //     $inventory->update([
+            //         'sku' => $request->sku,
+            //         'stock_count' => $request->stock_count,
+            //     ]);
+            // } else {
+            //     ProductInventory::create([
+            //         'product_id' => $item->id,
+            //         'sku' => $request->sku,
+            //         'stock_count' => $request->stock_count,
+            //         'sold_count' => 0,
+            //     ]);
+            // }
 
             DB::commit();
             return back()->with(FlashMsg::update_succeed('Product'));

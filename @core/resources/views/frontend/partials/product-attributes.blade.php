@@ -27,10 +27,16 @@
         </div>
     @endif
 </div>
+
+<div class="input-group d-flex" style="gap:20px; flex-direction: column;">
+    <button data-id="{{ $stock->id }}" class="prd-quantity-btn btn btn-outline-info" data-button-type="minus" data-unit = "{{ $stock->unitconverter }}"><i class="las la-minus" ></i></button>
+    <input disabled class="quantity form-control item_quantity_info" type="text" min="{{ $stock->unitconverter }}" max="10000000" data-id="{{ $stock['id'] }}"  step="{{ $stock['unitconverter'] }}" value="{{ $stock->unitconverter }}">
+    <button data-id="{{ $stock->id }}" class="prd-quantity-btn btn btn-outline-info" data-button-type="plus" data-unit = "{{ $stock->unitconverter }}"><i class="las la-plus" data-id="{{ $stock->id }}"></i></button>
+
+</div>
+<br>
 <div class="d-flex add_to_cart_info">
-    <div class="input-group">
-        <input class="quantity form-control" type="number" min="1" max="10000000" value="1">
-    </div>
+   
     <div class="add-cart-btn">
         <a href="#" data-id="{{ $product->id }}" class="add-to-cart modal_add_to_cart">{{ __('add to cart') }}</a>
     </div>
@@ -39,3 +45,33 @@
     </div>
     
 </div>
+
+
+<script>
+
+    $(document).on("click",".prd-quantity-btn",function (){
+            var quantityInput = $('.item_quantity_info[data-id="' + $(this).data("id") + '"]');
+            if($(this).data("button-type") === "minus"){
+                updateQuantity(quantityInput.val(),$(this).data("button-type"),$(this).data("unit"),$(this).data("id"), quantityInput);
+            }else if($(this).data("button-type") === "plus"){
+                updateQuantity(quantityInput.val(),$(this).data("button-type"),$(this).data("unit"),$(this).data("id"), quantityInput);
+            }
+        });
+    
+        function updateQuantity(val,type, unit, id, quantityInput){
+    
+    
+            if(type == "plus"){
+                if(quantityInput.val() != 1 ) quantityInput.val(parseInt(val) + parseInt(unit) );
+                else quantityInput.val(parseInt(unit));
+                
+            }else if(type == "minus"){
+                if(parseInt(val) > parseInt(unit)){
+                    quantityInput.val(parseInt(val) - parseInt(unit));
+                }else{
+                    quantityInput.val(parseInt(unit));
+                }
+            }
+    
+        }
+    </script>

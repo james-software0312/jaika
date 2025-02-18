@@ -14,6 +14,7 @@ use App\PageBuilder\Fields\Text;
 use App\PageBuilder\PageBuilderBase;
 use App\Product\Product;
 use App\Product\ProductCategory;
+use App\StockItemModel;
 use Intervention\Image\Facades\Image as InterImage;
 
 class ProductFilterStyleOne extends PageBuilderBase
@@ -189,8 +190,11 @@ class ProductFilterStyleOne extends PageBuilderBase
         $featured_text = __('Featured');
         $top_selling_text = __('Top selling');
         $new_text = __('New');
+        $section_title = __('OUR STORE');
         // loader
         $loader = $this->loader();
+        $section_description = __('A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring');
+        // dd($all_products);
 
         return <<<HTML
         <div class="our-store-area-wrapper" data-padding-top="{$padding_top}" data-padding-bottom="{$padding_bottom}">
@@ -267,7 +271,6 @@ HTML;
             } else {
                 $add_to_cart_markup = '<a href="#" data-attributes="'.$item->attributes.'" data-id="'.$item->id.'" class="add-to-cart add_to_cart_ajax">'.__('Add to Cart').'</a>';
             }
-
             $quick_view_data = getQuickViewDataMarkup($item);
         }
 
@@ -279,7 +282,9 @@ HTML;
         if($campaign_percentage){
             $campaign_percentage_markup ='<span class="discount-tag">-'.round($campaign_percentage, 2).'%</span>';
         }
-        
+        $stock = StockItemModel::where('product_id', $item->id)->first();
+        // dd($quick_view_data);
+        $quick_view_data .= "data-unitconverter = '".$stock->unitconverter."'";
         $hover_content = <<<HTML
         <div class="hover">
             <div class="left">
@@ -304,8 +309,8 @@ HTML;
 HTML;
         
         return <<<HTML
-        <div class="col-sm-6 col-md-4 col-lg-3 new">
-            <div class="single-our-store-wrapper single-new-design-wrapper single-product-item">
+        <div class="col-sm-6 col-md-4 col-lg-3 new gap-5">
+            <div class="single-our-store-wrapper single-new-design-wrapper single-product-item" >
                 <div class="product-img-box">
                     {$campaign_percentage_markup}
                     {$badge_markup}
