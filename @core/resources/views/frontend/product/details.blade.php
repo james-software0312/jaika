@@ -29,12 +29,7 @@
 @endsection 
 @section('content')
 <style>
-  .zoom-container {
-        position: relative;
-        width: 400px; /* Set your desired width */
-        height: 400px; /* Set your desired height */
-        overflow: hidden;
-    }
+ 
     .zoom-image {
         width: 100%;
         height: 100%;
