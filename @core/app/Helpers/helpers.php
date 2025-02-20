@@ -456,11 +456,12 @@ function float_amount_with_currency_symbol($amount, $text = false)
 
     $amount = number_format((float)$amount, 2, '.', '');
 
-    $return_val = $symbol . $amount;
+    // $return_val = $symbol . $amount;
 
-    if ($position == 'right') {
-        $return_val = $amount . $symbol;
-    }
+    // if ($position == 'right') {
+    //     $return_val = $amount . $symbol;
+    // }
+    $return_val = $amount . ' zł';
 
     return $return_val;
 }

@@ -185,7 +185,6 @@ class ProductFilterStyleOne extends PageBuilderBase
         foreach ($all_products as $item) {
             $output .= $this->getItemMarkup($item);
         }
-
         // product filter translatable texts
         $featured_text = __('Featured');
         $top_selling_text = __('Top selling');
@@ -203,7 +202,7 @@ class ProductFilterStyleOne extends PageBuilderBase
                     <div class="col-md-6 col-lg-5">
                         <div class="section-title-wrapper">
                             <h2 class="main-title">{$section_title}</h2>
-                            <p class="sub-title">{$section_description}</p>
+                            <!-- <p class="sub-title">{$section_description}</p> -->
                         </div>
                     </div>
                 </div>
@@ -223,13 +222,13 @@ class ProductFilterStyleOne extends PageBuilderBase
                 <div class="row our-store-item-wrap" id="product_filter_section">
                     {$output}
                 </div>
-                <div class="row justify-content-center">
+                <!-- <div class="row justify-content-center">
                     <div class="col-lg-4">
                         <div class="btn-wrapper">
                             <a href="{$shop_now_btn_url}" class="default-btn">{$shop_now_btn_text}</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         {$loader}

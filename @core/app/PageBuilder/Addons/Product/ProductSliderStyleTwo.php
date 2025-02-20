@@ -188,12 +188,15 @@ class ProductSliderStyleTwo extends PageBuilderBase
         $campaign_percentage = !is_null($campaign_product) ? getPercentage($item->sale_price, $sale_price) : false;
 
         $price = $price > 0 ? float_amount_with_currency_symbol($price) : '';
-        $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' . float_amount_with_currency_symbol($sale_price) . '</li><li class="price"><del>' . $price . '</del></li></ul></div>';
-        // if($sale_price < $price) {
-        //     $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' . float_amount_with_currency_symbol($sale_price) . '</li><li class="price"><del>' . $price . '</del></li></ul></div>';
-        // } else {
-        //     $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' . float_amount_with_currency_symbol($sale_price) . '</li></ul></div>';
-        // }
+        // $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' . float_amount_with_currency_symbol($sale_price) . '</li><li class="price"><del>' . $price . '</del></li></ul></div>';
+
+        // dd($sale_price);
+        if($item->sale_price < $item->price) {
+            $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' . float_amount_with_currency_symbol($sale_price) . '</li><li class="price"><del>' . $price . '</del></li></ul></div>';
+            // $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' . $sale_price .' '.  __('PLN') . ' </li><li class="price"><del>' . $item->price .' '.  __('PLN') . '</del></li></ul></div>';
+        } else {
+            $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' .  float_amount_with_currency_symbol($sale_price) .'</li></ul></div>';
+        }
 
         $add_to_cart_markup = "";
         if ($item->id) {
