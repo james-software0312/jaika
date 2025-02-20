@@ -174,7 +174,7 @@
                                             <input type="text" id="city" name="city" value="{{ old('city') ?? $user->city ?? '' }}">
                                         </div>
 
-                                        <div class="form-group col-lg-6 col-12">
+                                        {{-- <div class="form-group col-lg-6 col-12">
                                             <label for="address_province_ship">{{ __('State') }}</label>
                                             <select id="state" name="state">
                                                 <option value="">{{ __('Select State') }}</option>
@@ -187,9 +187,9 @@
                                                     @endforeach
                                                 @endif
                                             </select>
-                                        </div>
+                                        </div> --}}
 
-                                        <div class="form-group col-lg-6 col-12">
+                                        <div class="form-group  col-12">
                                             <label for="address_zip_ship_2">{{ __('Zip Code') }}</label>
                                             <input type="text" id="zipcode" name="zipcode"
                                                 value="{{ old('zipcode') ?? $user->zipcode ?? '' }}" />
