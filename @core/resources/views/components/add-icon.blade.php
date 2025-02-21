@@ -9,8 +9,6 @@
             <span class="caret"></span>
             <span class="sr-only">{{__("Toggle Dropdown")}}</span>
         </button>
-
-        
         <div class="dropdown-menu"></div>
     </div>
     <input type="hidden" class="form-control"  id="{{ $id }}" name="{{ $name }}" value="{{ (isset($value))? get_static_option($value) : (($setval)??'fas fa-phone') }}">
