@@ -117,7 +117,7 @@
                         </li>
                     @endcanany
 
-                    @canany(['slider-list', 'slider-create'])
+                    {{-- @canany(['slider-list', 'slider-create'])
                         <li class="@if (request()->is(['admin-home/slider*'])) active @endif main_dropdown">
                             <a href="javascript:void(0)" aria-expanded="true"><i class="ti-user"></i>
                                 <span>{{ __('Mobile Slider') }}</span></a>
@@ -132,7 +132,7 @@
                                 @endcan
                             </ul>
                         </li>
-                    @endcanany
+                    @endcanany --}}
 
                     @canany(['newsletter-list', 'newsletter-mail-send'])
                         <li class="main_dropdown @if (request()->is(['admin-home/newsletter/*', 'admin-home/newsletter'])) active @endif ">
