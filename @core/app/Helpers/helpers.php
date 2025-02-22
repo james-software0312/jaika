@@ -75,7 +75,8 @@ function render_image_markup_by_attachment_id($id, $class = null, $size = 'full'
 {
     if (empty($id)) return '';
     $output = '';
-
+    
+    // dd($size);
     $image_details = get_attachment_image_by_id($id, $size);
     if (!empty($image_details)) {
         $class_list = !empty($class) ? 'class="' . $class . '"' : '';
@@ -282,6 +283,8 @@ function render_favicon_by_id($id)
 }
 function get_attachment_image_by_id($id, $size = null, $default = false)
 {
+    // dd($id);
+    // $size = 'large';
     //all mediaupload= '';
     $image_details = \Illuminate\Support\Facades\Cache::remember('media_image_details_'.$id,500,function () use ($id){
         return MediaUpload::find($id);
@@ -298,6 +301,7 @@ function get_attachment_image_by_id($id, $size = null, $default = false)
             case "large":
                 if (file_exists('assets/uploads/media-uploader/large-' . $image_details->path)) {
                     $image_url = asset('assets/uploads/media-uploader/large-' . $image_details->path);
+                    // dd($image_url);
                 }
                 break;
             case "grid":
