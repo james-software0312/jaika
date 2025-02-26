@@ -27,6 +27,7 @@
                             @foreach ($all_cart_items as $key => $item)
                                 @php
                                     $product = $products->find($key);
+                                    $item_in_stock = optional($product->inventory)->quantity_website;
                                 @endphp
                                 @foreach ($item as $cart_item)
                                 @php
@@ -62,9 +63,10 @@
                                     </td>
                                     <td style="width:25%;">
                                         <div class="input-group w-100 " style="gap:20px;" >
-                                                <button data-id="{{ $cart_item['id'] }}" class="prd-quantity-btn btn btn-outline-info" data-button-type="minus" data-unit = "{{ $cart_item['unitconverter'] }}"><i class="las la-minus" ></i></button>
+                                                <input type="hidden" name="" id="" value="{{ $item_in_stock }}">
+                                                <button data-id="{{ $cart_item['id'] }}" class="prd-quantity-btn btn btn-outline-info" data-button-type="minus" data-unit = "{{ $cart_item['unitconverter'] }}" data-quantity = "{{$item_in_stock}}"><i class="las la-minus" ></i></button>
                                                 <input disabled class="quantity form-control item_quantity_info" type="text" min="{{ $cart_item['unitconverter'] }}" max="10000000" data-id="{{ $cart_item['id'] }}" data-attr="{{ json_encode($cart_item['attributes']) }}"  step="{{ $cart_item['unitconverter'] }}" value="{{ $cart_item['quantity'] }}">
-                                                <button data-id="{{ $cart_item['id'] }}" class="prd-quantity-btn btn btn-outline-info" data-button-type="plus" data-unit = "{{ $cart_item['unitconverter'] }}"><i class="las la-plus" data-id="{{ $cart_item['id'] }}"></i></button>
+                                                <button data-id="{{ $cart_item['id'] }}" class="prd-quantity-btn btn btn-outline-info" data-button-type="plus" data-unit = "{{ $cart_item['unitconverter'] }}" data-quantity = "{{$item_in_stock}}"><i class="las la-plus" data-id="{{ $cart_item['id'] }}" ></i></button>
                                         </div>
                                     </td>
                                     <td>
@@ -131,17 +133,23 @@
 
 $(document).on("click",".prd-quantity-btn",function (){
         var quantityInput = $('.item_quantity_info[data-id="' + $(this).data("id") + '"]');
+        console.log($(this).data("quantity"));
         if($(this).data("button-type") === "minus"){
-            updateQuantity(quantityInput.val(),$(this).data("button-type"),$(this).data("unit"),$(this).data("id"), quantityInput);
+            updateQuantity(quantityInput.val(),$(this).data("button-type"),$(this).data("unit"),$(this).data("id"), quantityInput, $(this).data("quantity"));
         }else if($(this).data("button-type") === "plus"){
-            updateQuantity(quantityInput.val(),$(this).data("button-type"),$(this).data("unit"),$(this).data("id"), quantityInput);
+            updateQuantity(quantityInput.val(),$(this).data("button-type"),$(this).data("unit"),$(this).data("id"), quantityInput, $(this).data("quantity"));
         }
     });
 
-    function updateQuantity(val,type, unit, id, quantityInput){
+    function updateQuantity(val,type, unit, id, quantityInput, quantity){
 
 
         if(type == "plus"){
+            if(quantity < parseInt(val) + parseInt(unit)) {
+                alert('Requested quantity is not available. Only available quantity is added to cart');
+                quantityInput.val(parseInt(val))
+
+            } else 
             if(quantityInput.val() != 1 ) quantityInput.val(parseInt(val) + parseInt(unit) );
             else quantityInput.val(parseInt(unit));
             
