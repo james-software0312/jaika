@@ -127,7 +127,8 @@
                     @endphp
                     <div class="price-wrap">
                         <span class="price" data-main-price="{{ $sale_price }}" id="price">{{ float_amount_with_currency_symbol($sale_price) }}</span>
-                        @if(!empty($deleted_price) && $deleted_price != 0)
+                        {{-- @if(!empty($deleted_price) && $deleted_price != 0) --}}
+                        @if($sale_price < $deleted_price)
                         <del class="del-price">{{ float_amount_with_currency_symbol($deleted_price) }}</del>
                         @endif
                         @if($campaign_percentage)
@@ -165,7 +166,7 @@
                         @endif
 
                         @php
-                            $item_in_stock = optional($product->inventory)->quantity;
+                            $item_in_stock = optional($product->inventory)->quantity_website;
                         @endphp
                         <div class="product_related_info mt-5">
                             @if($item_in_stock)
@@ -421,7 +422,8 @@
                             @endphp
                             <ul class="list">
                                 <li class="price">{{ float_amount_with_currency_symbol($related_sale_price) }}</li>
-                                @if(!empty($related_deleted_price) && $related_deleted_price != 0)
+                                {{-- @if(!empty($related_deleted_price) && $related_deleted_price != 0) --}}
+                                @if($related_deleted_price > $related_sale_price)
                                 <li class="price"><del>{{ float_amount_with_currency_symbol($related_deleted_price) }}</del></li>
                                 @endif
                             </ul>
@@ -507,6 +509,7 @@ document.querySelectorAll('.zoom-container').forEach(container => {
         if($(this).data("button-type") === "minus"){
             updateQuantity($("#quantity").val(),$(this).data("button-type"));
         }else if($(this).data("button-type") === "plus"){
+            
             updateQuantity($("#quantity").val(),$(this).data("button-type"));
         }
     });
@@ -515,7 +518,13 @@ document.querySelectorAll('.zoom-container').forEach(container => {
 ;
         let unit = "{{$unit->unitconverter}}";
         if(type == "plus"){
-            if($("#quantity").val() != 1) $("#quantity").val(parseInt(val) + parseInt(unit) );
+            item_in_stock = "{{ $item_in_stock }}";
+            console.log(item_in_stock);
+            if(parseInt(val) + parseInt(unit) > item_in_stock) {
+                $("#quantity").val(parseInt(unit));
+                alert('Requested quantity is not available. Only available quantity is added to cart');
+            }
+            else if($("#quantity").val() != 1) $("#quantity").val(parseInt(val) + parseInt(unit) );
             else $("#quantity").val(parseInt(unit));
             
         }else if(type == "minus"){

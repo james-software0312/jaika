@@ -65,7 +65,8 @@
             <div class="product-price-details">
                 <ul class="list">
                     <li class="price">{{ float_amount_with_currency_symbol($sale_price) }}</li>
-                    @if(!empty($deleted_price) && $deleted_price != 0)
+                    {{-- @if(!empty($deleted_price) && $deleted_price != 0) --}}
+                    @if($sale_price < $deleted_price)
                     <li class="price"><del>{{ float_amount_with_currency_symbol($deleted_price) }}</del></li>
                     @endif
                 </ul>

@@ -219,7 +219,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="stock_count">{{ __('Items in Stock') }}</label>
-                                        <input disabled type="text" id="stock_count" name="stock_count" class="form-control"  value="{{ $stock->quantity }}">
+                                        <input disabled type="text" id="stock_count" name="stock_count" class="form-control"  value="{{ $stock->quantity_website }}">
                                     </div>
                                 </div>
 

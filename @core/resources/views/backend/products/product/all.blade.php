@@ -50,8 +50,8 @@
                                         <td>
                                             <h6>{{ html_entity_decode($product->title) }}</h6>
                                             @if(!empty($product->inventory))
-                                                <small><strong>{{__('Stock')}}:</strong> {{optional($product->inventory)->quantity}}</small>
-                                                <small><strong>{{__('Sold')}}:</strong> {{optional($product->inventory)->quantity}}</small>
+                                                <small><strong>{{__('Stock')}}:</strong> {{optional($product->inventory)->quantity_website}}</small>
+                                                {{-- <small><strong>{{__('Sold')}}:</strong> {{optional($product->inventory)->quantity}}</small> --}}
                                             @endif
                                         </td>
                                         <td>{{ optional($product->category)->title }}</td>
