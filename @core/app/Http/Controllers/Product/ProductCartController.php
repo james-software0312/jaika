@@ -206,7 +206,7 @@ class ProductCartController extends Controller
         $subtotal = CartAction::getCartTotalAmount($all_cart_items, $products);
         $subtotal_with_tax = $subtotal + $default_shipping_cost;
         $total = CartAction::calculateCoupon($request, $subtotal_with_tax, $products);
-
+        // dd($all_cart_items);
         return view('frontend.cart.cart-partial', compact('all_cart_items', 'products', 'subtotal', 'default_shipping_cost', 'total'));
     }
 

@@ -214,8 +214,8 @@ class ProductController extends Controller
         
         $this->validate($request, [
             'title' => 'required|string|max:191',
-            'summary' => 'required|string',
-            'description' => 'required|string',
+            // 'summary' => 'equired|string',
+            // 'description' => 'required|string',
             'category_id' => 'required|string',
             'sub_category_id' => 'nullable|array',
             'image' => 'required|string|max:191',
@@ -240,6 +240,9 @@ class ProductController extends Controller
                 'updated_at' => now(),
             ]);
         }
+        StockItemModel::where('product_id', $item->id)->update([
+            'is_visible' => $request->status,
+        ]);
         $all_attribute = [];
         if (isset($request->attribute_id) && count($request->attribute_id)) {
             foreach ($request->attribute_id as $key => $attribute_id) {

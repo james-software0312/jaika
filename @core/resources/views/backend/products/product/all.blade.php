@@ -69,9 +69,9 @@
                                         </td>
                                         <x-table.td-image :image="$product->image" />
                                         <td>
-                                            @can('product-delete')
+                                            {{-- @can('product-delete')
                                             <x-delete-popover :url="route('admin.products.delete', $product->id)"/>
-                                            @endcan
+                                            @endcan --}}
                                             @can('product-edit')
                                             <x-table.btn.edit :route="route('admin.products.edit', $product->id)" />
                                             @endcan

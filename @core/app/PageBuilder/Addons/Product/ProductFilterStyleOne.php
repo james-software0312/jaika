@@ -193,8 +193,6 @@ class ProductFilterStyleOne extends PageBuilderBase
         // loader
         $loader = $this->loader();
         $section_description = __('A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring');
-        // dd($all_products);
-
         return <<<HTML
         <div class="our-store-area-wrapper" data-padding-top="{$padding_top}" data-padding-bottom="{$padding_bottom}">
             <div class="container">

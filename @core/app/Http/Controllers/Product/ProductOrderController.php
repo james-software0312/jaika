@@ -18,7 +18,7 @@ use App\Shipping\UserShippingAddress;
 use App\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;  
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 
@@ -248,6 +248,7 @@ class ProductOrderController extends Controller
                     $product->save();
                     $stockItem->quantity -= $item['quantity']/$stockItem->unitconverter;
                     $stockItem->single_quantity -= $item['quantity'];
+                    $stockItem->quantity_website -= $item['quantity'];
                     $stockItem->save();
                     SellOrderDetail::insert([
                         'stockitemid' => $stockItem->id,

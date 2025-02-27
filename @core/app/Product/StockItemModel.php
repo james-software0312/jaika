@@ -30,7 +30,8 @@ class StockItemModel extends Model
         'is_visible', 
         'is_delete', 
         'product_id', 
-        'color'
+        'color',
+        'quantity_website'
     ];
 
     public function product()

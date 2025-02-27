@@ -148,6 +148,8 @@
                 success: function (data) {
                     $('.lds-ellipsis').hide();
                     $('#cart-container').html(data);
+                    location.reload();
+
                 },
                 error: function (err) {
                     toastr.error('{{ __("An error occurred") }}');

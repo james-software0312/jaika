@@ -707,6 +707,7 @@ class FrontendController extends Controller
         CartAction::validateItemQuantity();
 
         $all_cart_items = CartHelper::getItems();
+        // dd($all_cart_items);
         $products = Product::whereIn('id', array_keys($all_cart_items))->get();
 
         $subtotal = CartAction::getCartTotalAmount($all_cart_items, $products);
