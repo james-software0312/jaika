@@ -15,6 +15,10 @@ use App\Product\ProductSellInfo;
 use App\Shipping\ShippingMethod;
 use App\Shipping\ShippingMethodOption;
 use App\Shipping\UserShippingAddress;
+use App\SellOrder;
+use App\StockItemModel;
+use App\ContactModel;
+use App\SellOrderDetail;
 use App\Tax\CountryTax;
 use App\Tax\StateTax;
 use Carbon\Carbon;
@@ -27,6 +31,43 @@ class ProductSellPaymentController extends Controller
 {
     const SUCCESS_ROUTE = 'frontend.products.payment.success';
     const CANCEL_ROUTE = 'frontend.products.payment.cancel';
+
+    
+    public function generatereference() {
+        $randomString = Str::random(3);
+
+        $res =  'REF'.date('ymd').$randomString;
+
+        return $res;
+    }
+
+    public function getNewShowReference($payment_type, $date)
+    {
+        if ($payment_type != 'pre_order')
+            $sell_orders = SellOrder::where('selldate', '=', $date)->where('payment_type', '=', $payment_type)->where('pre_order', '=', false)->get();
+        else
+            $sell_orders = SellOrder::where('selldate', '=', $date)->where('pre_order', '=', true)->get();
+        $prefix = $this->setShowRefPrefix($payment_type);
+        $new_show_ref =  $prefix . "/" . date('d/m/Y', strtotime($date)). "/" . sprintf('%04d', count($sell_orders) + 1);
+        return $new_show_ref;
+    }
+
+    private function setShowRefPrefix($payment_type)
+    {
+        $prefix = "";
+        if ($payment_type == 'bank_transfer') {
+            $prefix = "WM";
+        } else if ($payment_type == 'cash') {
+            $prefix = "WZ";
+        } else if ($payment_type == 'pre_order') {
+            $prefix = "WP";
+        } else if ($payment_type == 'cash_on_delivery') {
+            $prefix = "WD";
+        }
+
+        return $prefix;
+    }
+
 
     public function checkout(Request $request)
     {
@@ -178,7 +219,66 @@ class ProductSellPaymentController extends Controller
             'checkout_image_path' => $checkout_image_path,
         ];
 
-        $product_sell_info = ProductSellInfo::create($product_sell_info);
+        $product_sell_info = ProductSellInfo::create($product_sell_info); 
+        $order_details = ProductSellInfo::find($product_sell_info->id);
+        // dd($order_details);
+        $contact = ContactModel::where('email', $order_details->email)->first();
+        if($contact) {
+            $contact->status = 1;
+            $contact->save();
+        } else {
+            ContactModel::insert([
+                'name' => $order_details->name,
+                'country' => $order_details->country,
+                'address' => $order_details->address,
+                'city' => $order_details->city,
+                'email' => $order_details->email,
+                'phone' => $order_details->phone,
+                'status' => 1
+            ]);
+            $contact = ContactModel::where('email', $order_details->email)->first();
+        }
+
+        
+        $cart_items = json_decode($order_details->order_details, true);
+        $product = '';
+        $data = [];
+        foreach ($cart_items as $product_id => $product_variations) {
+            $product = Product::find($product_id);
+            $stockItem = StockItemModel::where('product_id',$product_id)->first();
+            foreach ($product_variations as $key => $item) {
+                $ref        = $this->generatereference();
+                $show_ref        = $this->getNewShowReference('bank_transfer', date('Y-m-d'));
+                if (!empty($product)) {
+                    SellOrderDetail::insert([
+                        'stockitemid' => $stockItem->id,
+                        'warehouseid' => $stockItem->warehouseid,
+                        'selldate' => Carbon::now()->format('Y-m-d'),
+                        'price' => $stockItem->price,
+                        'quantity' =>$item['quantity'],
+                        'contactid' =>  $contact->id,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                        'unitid' => $stockItem->unitid,
+                        'reference' => $ref,
+
+                    ]);
+                }
+            }
+            
+        }
+        SellOrder::insert(([
+            'warehouseid' => $stockItem->warehouseid,
+            'selldate' => Carbon::now()->format('Y-m-d'),
+            'contactid' =>  $contact->id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'reference' => $ref,
+            'show_reference' => $show_ref,
+            'payment_type' =>  $request->sanitize_html('selected_payment_gateway'),
+            'sh_sellId' => $product_sell_info->id,
+            'withinvoice' => 1
+        ]));
         
         CartAction::storeItemSoldCount($all_cart_items, $products);
         try{

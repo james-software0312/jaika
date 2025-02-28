@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;  
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class ProductOrderController extends Controller
 {
@@ -250,25 +251,26 @@ class ProductOrderController extends Controller
                     $stockItem->single_quantity -= $item['quantity'];
                     $stockItem->quantity_website -= $item['quantity'];
                     $stockItem->save();
-                    SellOrderDetail::insert([
-                        'stockitemid' => $stockItem->id,
-                        'warehouseid' => $stockItem->warehouseid,
-                        'selldate' => Carbon::now()->format('Y-m-d'),
-                        'price' => $stockItem->price * $stockItem->unitconverter*$item['quantity'],
-                        'quantity' =>$item['quantity'],
-                        'contactid' =>  $contact->id,
-                        'created_at' => Carbon::now(),
-                        'updated_at' => Carbon::now(),
-                        'unitid' => $stockItem->unitid,
+                    // SellOrderDetail::insert([
+                    //     'stockitemid' => $stockItem->id,
+                    //     'warehouseid' => $stockItem->warehouseid,
+                    //     'selldate' => Carbon::now()->format('Y-m-d'),
+                    //     'price' => $stockItem->price * $stockItem->unitconverter*$item['quantity'],
+                    //     'quantity' =>$item['quantity'],
+                    //     'contactid' =>  $contact->id,
+                    //     'created_at' => Carbon::now(),
+                    //     'updated_at' => Carbon::now(),
+                    //     'unitid' => $stockItem->unitid,
 
-                    ]);
+                    // ]);
                 }
             }
-            SellOrder::insert(([
-                'warehouseid' => $stockItem->warehouseid,
+            SellOrder::where('sh_sellId', $request->order_id)->update(([
+                // 'warehouseid' => $stockItem->warehouseid,
                 'selldate' => Carbon::now()->format('Y-m-d'),
-                'contactid' =>  $contact->id,
-                'created_at' => Carbon::now(),
+                // 'contactid' =>  $contact->id,
+                // 'created_at' => Carbon::now(),
+                'confirmed' => 1,
                 'updated_at' => Carbon::now(),
             ]));
         }

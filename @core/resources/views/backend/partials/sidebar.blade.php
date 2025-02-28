@@ -59,11 +59,11 @@
                                 <a href="{{ route('admin.products.category.all') }}">{{ __('Category') }}</a>
                             </li>
                             @endcan
-                            @can('product-subcategory-list')
+                            {{-- @can('product-subcategory-list')
                             <li class="{{ active_menu('admin-home/products/sub-categories') }}">
                                 <a href="{{ route('admin.products.subcategory.all') }}">{{ __('Sub-Category') }}</a>
                             </li>
-                            @endcan
+                            @endcan --}}
                             @can('product-tag-list')
                             <li class="{{ active_menu('admin-home/products/tags') }}">
                                 <a href="{{ route('admin.products.tag.all') }}">{{ __('Tag') }}</a>
@@ -302,14 +302,14 @@
                         </a>
                     </li>
                     @endcan
-                    @can('product-inventory-list')
+                    {{-- @can('product-inventory-list')
                     <li class="{{ active_menu('admin-home/products/product-inventory') }}">
                         <a href="{{ route('admin.products.inventory.all') }}">
                             <i class="ti-package"></i>
                             <span>{{ __('Inventory') }}</span>
                         </a>
                     </li>
-                    @endcan
+                    @endcan --}}
                     <!-- @can('product-order-list')
                     <li class="{{ active_menu('admin-home/products/product-order') }}">
                         <a href="{{ route('admin.product.order.logs') }}">

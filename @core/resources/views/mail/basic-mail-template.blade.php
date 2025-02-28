@@ -144,36 +144,38 @@ $default_lang = get_default_language();
                 {!! $data['message'] !!}
             </h3>
         </div>
-        <div>
-            <table class="table table-default">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Color</th>
-                        <th>Size</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($data['products'] as $product)
-                    <tr>
-                        <td>{{ $product['title'] }}</td>
-                        <td>{{ $product['color'] }}</td>
-                        <td>{{ $product['size'] }}</td>
-                        <td>${{ number_format($product['price'], 2) }}</td>
-                        <td>{{ $product['quantity'] }}</td>
-                        <td>${{ number_format($product['total_price'], 2) }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        <br>
-        <div>Total Price: ${{$data['total_price']}}</div>
-        <div>Payment Method: {{$data['payment_gateway']}}</div>
-        <br>
+        @if(array_key_exists('products', $data))
+            <div>
+                <table class="table table-default">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Color</th>
+                            <th>Size</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($data['products'] as $product)
+                        <tr>
+                            <td>{{ $product['title'] }}</td>
+                            <td>{{ $product['color'] }}</td>
+                            <td>{{ $product['size'] }}</td>
+                            <td>${{ number_format($product['price'], 2) }}</td>
+                            <td>{{ $product['quantity'] }}</td>
+                            <td>${{ number_format($product['total_price'], 2) }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <div>Total Price: ${{$data['total_price']}}</div>
+            <div>Payment Method: {{$data['payment_gateway']}}</div>
+            <br>
+        @endif
         <footer>
             {!! get_footer_copyright_text() !!}
         </footer>

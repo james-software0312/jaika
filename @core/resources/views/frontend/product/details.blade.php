@@ -575,9 +575,10 @@ document.querySelectorAll('.zoom-container').forEach(container => {
                         _token: '{{ csrf_token() }}'
                     },
                     success: function (data) {
-                        toastr.success(data.msg);
                         if (data.quantity_msg) {
                             toastr.warning(data.quantity_msg)
+                        } else {
+                            toastr.success(data.msg);
                         }
                         refreshShippingDropdown();
                     },

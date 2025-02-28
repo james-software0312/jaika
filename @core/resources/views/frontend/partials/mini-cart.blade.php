@@ -38,7 +38,7 @@
                 </span>
                 @if(!empty($product->price) && $product->price != 0)
                 <span class="price">
-                    <del>{{ float_amount_with_currency_symbol($product->price) }}</del>
+                    {{-- <del>{{ float_amount_with_currency_symbol($product->price) }}</del> --}}
                 </span>
                 @endif
             </div>

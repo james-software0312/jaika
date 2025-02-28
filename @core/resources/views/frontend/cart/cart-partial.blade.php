@@ -85,11 +85,14 @@
                 </div>
                 <div class="cart-btn-wrapper one">
                     <div class="left">
-                        <a href="#" class="default-btn clear_cart">{{ get_static_option('clear_cart_text', __('Clear Cart')) }}</a>
-                        <a href="#" class="default-btn update_cart">{{ get_static_option('update_cart_text', __('Update cart')) }}</a>
+                        {{-- <a href="#" class="default-btn clear_cart">{{ get_static_option('clear_cart_text', __('Clear Cart')) }}</a> --}}
+                        <a href="#" class="default-btn clear_cart">{{ __('Clear Cart') }}</a>
+                        {{-- <a href="#" class="default-btn update_cart">{{ get_static_option('update_cart_text', __('Update cart')) }}</a> --}}
+                        <a href="#" class="default-btn update_cart">{{ __('Update cart') }}</a>
                     </div>
                     <div class="right">
-                        <a href="{{ route('frontend.products.all') }}" class="default-btn">{{ get_static_option('cart_continue_shopping_text',__('Continue shopping')) }}</a>
+                        {{-- <a href="{{ route('frontend.products.all') }}" class="default-btn">{{ get_static_option('cart_continue_shopping_text',__('Continue shopping')) }}</a> --}}
+                        <a href="{{ route('frontend.products.all') }}" class="default-btn">{{ __('Continue shopping') }}</a>
                     </div>
                 </div>
             </div>
@@ -98,29 +101,35 @@
             <div class="col-lg-7">
                 <!-- discount coupon area -->
                 <div class="discount-coupon-area">
-                    <h4 class="title">{{ get_static_option('cart_coupon_discount_title', __('coupon discount')) }} </h4>
-                    <p class="info">{{ get_static_option('cart_coupon_discount_subtitle', __('No products in your cart!')) }}</p>
+                    {{-- <h4 class="title">{{ get_static_option('cart_coupon_discount_title', __('coupon discount')) }} </h4> --}}
+                    <h4 class="title"> {{ __('coupon discount') }} </h4>
+                    {{-- <p class="info">{{ get_static_option('cart_coupon_discount_subtitle', __('No products in your cart!')) }}</p> --}}
+                    <p class="info">{{__('No products in your cart!') }}</p>
                     <form action="{{ route('frontend.products.cart.apply.coupon') }}" method="POST" class="discount-coupon">
                         @csrf
                         <div class="form-group">
                             <input type="text" name="coupon" id="coupon_input" class="form-control" placeholder="{{ get_static_option('cart_coupon_discount_placeholder', __('Enter your coupon code')) }}" value="{{ request()->coupon ?? '' }}">
                         </div>
-                        <button type="submit">{{ get_static_option('cart_apply_coupon_text',__('apply coupon')) }}</button>
+                        {{-- <button type="submit">{{ get_static_option('cart_apply_coupon_text',__('apply coupon')) }}</button> --}}
+                        <button type="submit">{{__('apply coupon') }}</button>
                     </form>
                 </div>
             </div>
             <div class="col-lg-5">
                 <div class="cart-total">
-                    <h4 class="title">{{ get_static_option('cart_total_title',__('cart total')) }}</h4>
+                    {{-- <h4 class="title">{{ get_static_option('cart_total_title',__('cart total')) }}</h4> --}}
+                    <h4 class="title">{{__('cart total') }}</h4>
                     <div class="cost-name-amount">
-                        <span class="same sub">{{ get_static_option('cart_sub_total_text', __('sub total')) }}:</span>
+                        {{-- <span class="same sub">{{ get_static_option('cart_sub_total_text', __('sub total')) }}:</span> --}}
+                        <span class="same sub">{{ __('sub total') }}:</span>
                         {{-- total => subtotal --}}
                         <span class="same sub-amount">{{ float_amount_with_currency_symbol($total) }}</span>
                     </div>
                     <div class="btn-wrapper">
                         <form action="{{ route('frontend.checkout')}}">
                             <input type="hidden" name="coupon" class="form-control" placeholder="Enter your coupon code" value="{{ request()->coupon ?? '' }}">
-                            <button class="default-btn">{{ get_static_option('cart_proceed_to_checkout_text',__('Proceed to checkout') ) }}</button>
+                            {{-- <button class="default-btn">{{ get_static_option('cart_proceed_to_checkout_text',__('Proceed to checkout') ) }}</button> --}}
+                            <button class="default-btn">{{__('Proceed to checkout') }}</button>
                         </form>
                     </div>
                 </div>

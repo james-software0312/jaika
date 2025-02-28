@@ -77,9 +77,10 @@
                         _token: '{{ csrf_token() }}'
                     },
                     success: function (data) {
-                        toastr.success(data.msg);
                         if (data.quantity_msg) {
                             toastr.warning(data.quantity_msg)
+                        } else {
+                            toastr.success(data.msg);
                         }
                         refreshShippingDropdown();
                     },
@@ -110,9 +111,10 @@
                             _token: '{{ csrf_token() }}'
                         },
                         success: function (data) {
-                            toastr.success(data.msg);
                             if (data.quantity_msg) {
                                 toastr.warning(data.quantity_msg)
+                            } else {
+                                toastr.success(data.msg);
                             }
                             setTimeout(function () {
                                 location.href = '{{ route("frontend.checkout") }}';
@@ -352,6 +354,7 @@
                         refreshShippingDropdown();
                     },
                     error: function (err) {
+                        console.log(err);
                         toastr.error('{{ __("An error occurred") }}');
                         $('.lds-ellipsis').hide(300);
                     }
@@ -392,9 +395,10 @@
                         _token: '{{ csrf_token() }}'
                     },
                     success: function (data) {
-                        toastr.success(data.msg);
                         if (data.quantity_msg) {
                             toastr.warning(data.quantity_msg)
+                        } else {
+                            toastr.success(data.msg);
                         }
                         setTimeout(function () {
                             location.href = '{{ route("frontend.checkout") }}';
@@ -442,9 +446,10 @@
                             _token: '{{ csrf_token() }}'
                         },
                         success: function (data) {
-                            toastr.success(data.msg);
                             if (data.quantity_msg) {
                                 toastr.warning(data.quantity_msg)
+                            } else {
+                                toastr.success(data.msg);
                             }
                             refreshShippingDropdown();
                         },

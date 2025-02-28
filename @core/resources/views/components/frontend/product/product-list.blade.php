@@ -3,7 +3,7 @@
 @endphp
 <div class="single-shop-list-item">
     <div class="product-img-box">
-        {!! render_image_markup_by_attachment_id($product->image, '', 'thumbnail') !!}
+        {!! render_image_markup_by_attachment_id($product->image, '', 'grid') !!}
     </div>
     <div class="product-details-wrap">
         <div class="ratings">

@@ -27,7 +27,7 @@
             @endif
 
             <a href="{{ route('frontend.products.single', html_entity_decode($product->slug)) }}">
-                {!! render_image_markup_by_attachment_id($product->image, '', 'grid') !!}
+                {!! render_image_markup_by_attachment_id($product->image, '', 'gird') !!}
             </a>
             <div class="hover">
                 <ul class="list">

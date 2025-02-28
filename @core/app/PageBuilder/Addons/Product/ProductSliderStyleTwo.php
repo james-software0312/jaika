@@ -178,7 +178,7 @@ class ProductSliderStyleTwo extends PageBuilderBase
     {
         $route = route('frontend.products.single', $item->slug);
 
-        $image_markup = render_image_markup_by_attachment_id($item->image, '', 'large');
+        $image_markup = render_image_markup_by_attachment_id($item->image, '', 'grid');
         $title_markup = "<h4 class='product-title'><a href='{$route}'>{$item->title}</a></h4>";
 
         // campaign product check

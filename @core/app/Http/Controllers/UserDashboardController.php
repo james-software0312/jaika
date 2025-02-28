@@ -67,11 +67,10 @@ class UserDashboardController extends Controller
             return redirect()->route('user.home');
         }
         $message_body = __('Here is your verification code') . ' <span class="verify-code">' . $user_details->email_verify_token . '</span>';
-
         try {
             Mail::to($user_details->email)->send(new BasicMail([
                 'subject' => __('Verify your email address'),
-                'message' => $message_body
+                'message' => $message_body,
             ]));
         } catch (\Exception $e) {
             return redirect()->route('user.email.verify')->with(['msg' => $e->getMessage(), 'type' => 'danger']);
