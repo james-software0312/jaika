@@ -27,7 +27,7 @@
             @endif
 
             <a href="{{ route('frontend.products.single', html_entity_decode($product->slug)) }}">
-                {!! render_image_markup_by_attachment_id($product->image, '', 'gird') !!}
+                {!! render_image_markup_by_attachment_id($product->image, '', 'grid') !!}
             </a>
             <div class="hover">
                 <ul class="list">
@@ -53,7 +53,7 @@
                             <a href="{{ route('frontend.products.single', $product->slug) }}">{{ __('View Options') }} <i class="las la-eye"></i></a></li>
                     @else
                         <li>
-                            <a href="#" data-attributes="{{ $product->attributes }}" data-id="{{ $product->id }}" class="add_to_cart_ajax">{{ __('Add to Cart') }} {{ $product->id }} sdf <i class="las la-shopping-cart icon"></i></a>
+                            <a href="#" data-attributes="{{ $product->attributes }}" data-id="{{ $product->id }}" class="add_to_cart_ajax">{{ __('Add to Cart') }} <i class="las la-shopping-cart icon"></i></a>
                         </li>
                     @endif
                 </ul>

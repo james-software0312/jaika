@@ -209,7 +209,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category_id">{{ __('Category') }}</label>
-                                        <select class="form-control" name="category_id" id="category_id">
+                                        <select class="form-control" name="category_id" id="category_id" disabled>
                                             @foreach ($all_category as $category)
                                             <option value="{{ $category->id }}" @if($product->category_id == $category->id) selected @endif>{{ $category->title }}</option>
                                             @endforeach

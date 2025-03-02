@@ -1059,6 +1059,7 @@ function render_frontend_sidebar($location, $args = [])
 {
     $output = '';
     $all_widgets = \App\Widgets::where(['widget_location' => $location])->orderBy('widget_order', 'ASC')->get();
+    // dd($all_widgets);
     foreach ($all_widgets as $widget) {
         $output .= \App\WidgetsBuilder\WidgetBuilderSetup::render_widgets_by_name_for_frontend([
             'name' => $widget->widget_name,

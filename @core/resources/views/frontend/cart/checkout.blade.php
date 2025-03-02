@@ -43,14 +43,18 @@
                             @if (!$user)
                                 <p class="query">
                                     <i class="las la-exclamation-circle icon"></i>
-                                    {!! filter_static_option_value('returning_customer_text', $setting_text, __('Returning customer?')) !!}
-                                    <a href="#" id="toggle_login">{!! filter_static_option_value('toggle_login_text', $setting_text, __('Click here to login')) !!}</a>
+                                    {!! __('Returning customer?') !!}
+                                    {{-- {!! filter_static_option_value('returning_customer_text', $setting_text, __('Returning customer?')) !!} --}}
+                                    {{-- <a href="#" id="toggle_login">{!! filter_static_option_value('toggle_login_text', $setting_text, __('Click here to login')) !!}</a> --}}
+                                    <a href="#" id="toggle_login">{!!  __('Click here to login')!!}</a>
                                 </p>
                                 {{-- login area --}}
                                 <div class="discount-coupon-area margin-bottom-30 d-none" id="login_container">
-                                    <h4 class="title">{!! filter_static_option_value('signin_title', $setting_text, __('Sign in')) !!}</h4>
+                                    {{-- <h4 class="title">{!! filter_static_option_value('signin_title', $setting_text, __('Sign in')) !!}</h4> --}}
+                                    <h4 class="title">{!! __('Sign in') !!}</h4>
                                     <p class="info">
-                                        {!! filter_static_option_value('signin_subtitle', $setting_text, __('Login to buy the product as user')) !!}
+                                        {{-- {!! filter_static_option_value('signin_subtitle', $setting_text, __('Login to buy the product as user')) !!} --}}
+                                        {!! __('Login to buy the product as user') !!}
                                     </p>
                                     <form class="form-wrapper" id="login_form_order_page">
                                         <div class="error-wrap text-center"></div>
@@ -70,13 +74,15 @@
                                                 <div class="left">
                                                     <input type="checkbox" class="form-check-input" id="exampleCheck1" name="remember">
                                                     <label class="form-check-label" for="exampleCheck1">
-                                                        {!! filter_static_option_value('remember_text', $setting_text, __('Remember me')) !!}
+                                                        {{-- {!! filter_static_option_value('remember_text', $setting_text, __('Remember me')) !!} --}}
+                                                        {!!__('Remember me') !!}
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="btn-wrapper">
-                                            <button type="submit" id="login_btn" class="default-btn">{!! filter_static_option_value('remember_signin_btn_text', $setting_text, __('Sign in')) !!}</button>
+                                            {{-- <button type="submit" id="login_btn" class="default-btn">{!! filter_static_option_value('remember_signin_btn_text', $setting_text, __('Sign in')) !!}</button> --}}
+                                            <button type="submit" id="login_btn" class="default-btn">{!! __('Sign in') !!}</button>
                                         </div>
                                         <div class="sign-in-with">
                                             @if(get_static_option('enable_google_login'))
@@ -98,36 +104,36 @@
                             @endif
                             <p class="query">
                                 <i class="las la-exclamation-circle icon"></i>
-                                {!! filter_static_option_value('have_coupon_text', $setting_text, __('Have a coupon?')) !!}
-                                <a href="#" class="toggle_coupon">{!! filter_static_option_value('enter_coupon_text', $setting_text, __('Click here to enter your code')) !!}</a>
+                                {{-- {!! filter_static_option_value('have_coupon_text', $setting_text, __('Have a coupon?')) !!} --}}
+                                {!!__('Have a coupon?') !!}
+                                {{-- <a href="#" class="toggle_coupon">{!! filter_static_option_value('enter_coupon_text', $setting_text, __('Click here to enter your code')) !!}</a> --}}
+                                <a href="#" class="toggle_coupon">{!! __('Click here to enter your code') !!}</a>
                             </p>
                             <!-- discount coupon area -->
                             <div class="discount-coupon-area margin-bottom-50 margin-top-20 coupon_section d-none">
                                 <h4 class="title">{!! filter_static_option_value('coupon_title', $setting_text, __('coupon discount')) !!}</h4>
                                 <p class="info">
-                                    {!! filter_static_option_value('coupon_subtitle', $setting_text, 
-                                            __('There are many variations of passages of Lorem Ipsum available, but the
+                                    {!! __('There are many variations of passages of Lorem Ipsum available, but the
                                             majority have suffered alteration in some.'
                                             )
-                                        ) 
                                     !!}
                                 </p>
 
                                 <form action="{{ route('frontend.checkout.apply.coupon') }}" method="get" class="discount-coupon">
                                     <div class="form-group">
                                         <input type="text" name="coupon" class="form-control"
-                                            placeholder="{!! filter_static_option_value('coupon_placeholder', $setting_text, __('Enter your coupon code')) !!}"
+                                            placeholder="{!! __('Enter your coupon code') !!}"
                                             value="{{ old('coupon') ?? request()->coupon }}">
                                     </div>
                                     <div class="btn-wrapper">
-                                        <button class="default-btn" type="submit">{!! filter_static_option_value('apply_coupon_btn_text', $setting_text, __('apply coupon')) !!} </button>
+                                        <button class="default-btn" type="submit">{!!  __('apply coupon') !!} </button>
                                     </div>
                                 </form>
                             </div>
 
                             <!-- billing details area -->
                             <div class="billing-details-area-wrapper">
-                                <h3 class="title">{!! filter_static_option_value('checkout_page_title', $setting_text, __('Billing detail')) !!}</h3>
+                                <h3 class="title">{!!  __('Billing detail') !!}</h3>
                                 <form action="{{ route('frontend.checkout') }}" method="POST" id="billing_info" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="coupon" id="coupon_code" value="{{ old('coupon') ?? request()->coupon }}">
@@ -200,7 +206,7 @@
                                                 <input type="checkbox" id="create_account" name="create_account"
                                                     class="form-check-input">
                                                 <label class="form-check-label" for="create_account">
-                                                    {!! filter_static_option_value('create_account_text', $setting_text, __('Create an Account?')) !!}
+                                                    {!!  __('Create an Account?') !!}
                                                 </label>
                                             </div>
                                             <div class="form-group col-lg-12 col-12" style="display: none">
@@ -227,7 +233,7 @@
                                         <div class="form-group form-check col-12">
                                             <input type="checkbox" class="form-check-input" id="ship_another_address">
                                             <label class="form-check-label" for="ship_another_address">
-                                                {!! filter_static_option_value('ship_to_another_text', $setting_text, __('Ship to another address')) !!}
+                                                {!! __('Ship to another address') !!}
                                             </label>
                                         </div>
                                         <div id="user_shipping_address_container" class="container-fluid" style="display: none">
@@ -294,19 +300,19 @@
                                     $checkout_page_terms_link_url = get_static_option('checkout_page_terms_link_url');
                                     $checkout_page_terms_link_url = $checkout_page_terms_link_url ? url($checkout_page_terms_link_url) : "#";
                             
-                                    $terms_text = str_replace(['[lnk]', '[/lnk]'], ["<a class='terms' href='$checkout_page_terms_link_url'>", "</a>"], $checkout_page_terms_text);
+                                    $terms_text = str_replace(['[lnk]', '[/lnk]'], ["<a class='terms' href='$checkout_page_terms_link_url'>", "</a>"], __($checkout_page_terms_text));
                                 @endphp
                                 <input type="checkbox" class="form-check-input" name="agree" id="Checkhh">
                                 <label class="form-check-label" for="Checkhh">
-                                    {!! $terms_text !!}
+                                    {!! __($terms_text) !!}
                                 </label>
                             </div>
                             <div class="btn-wrapper btn-top">
-                                <button type="submit" class="default-btn">{!! filter_static_option_value('proceed_to_checkout_btn_text', $setting_text, __('Proceed to checkout')) !!}</button>
+                                <button type="submit" class="default-btn">{!!  __('Proceed to checkout') !!}</button>
                             </div>
                             <div class="btn-wrapper ">
                                 <a href="{{ route('frontend.products.cart') }}" class="default-btn reverse">
-                                    {!! filter_static_option_value('return_to_cart_btn_text', $setting_text, __('Return to Cart')) !!}
+                                    {!! __('Return to Cart') !!}
                                 </a>
                             </div>
                         </div>
@@ -326,9 +332,9 @@
                             {!! render_image_markup_by_attachment_id(get_static_option('empty_cart_image')) !!}
                         </div>
                         <div class="content">
-                            <p class="info">{!! filter_static_option_value('checkout_page_no_product_text', $setting_text, __('No products in your cart!')) !!}</p>
+                            <p class="info">{!!  __('No products in your cart!') !!}</p>
                             <div class="btn-wrapper">
-                                <a href="{{ route('homepage') }}" class="default-btn">{!! filter_static_option_value('back_to_home_btn_text', $setting_text, __('Back to home')) !!}</a>
+                                <a href="{{ route('homepage') }}" class="default-btn">{!!  __('Back to home') !!}</a>
                             </div>
                         </div>
                     </div>

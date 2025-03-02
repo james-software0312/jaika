@@ -123,4 +123,38 @@ class RegisterController extends Controller
     {
         return redirect()->to(route('user.login', ['type' => 'register']));
     }
+
+    public function register(Request $request) {
+        // dd($request->input());
+        $this->validate($request, [
+            'username' => 'required|string|max:191|unique:users',
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|max:191|unique:users',
+            'address' => 'nullable|string|max:191',
+            'zipcode' => 'nullable|string|max:191',
+            'company' => 'nullable|string|max:191',
+            'city' => 'nullable|string|max:191',
+            'state' => 'nullable|string|max:191',
+            'country' => 'nullable|string|max:191',
+            'phone' => 'nullable|string|max:191',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+        User::create([
+            'username' => $request->username,
+            'name' => $request->name,
+            'email' => $request->email,
+            'address' => $request->address,
+            'zipcode' => $request->zipcode,
+            'company' => $request->company,
+            'city' => $request->city,
+            'state' => $request->state,
+            'country' => $request->country,
+            'phone' => $request->phone,
+            'vat_number' => $request->vat,
+            'password' => Hash::make($request->password),
+            'business' => ($request->business == 'on')?"company":"indiviual",
+        ]);
+        session()->flash('success', 'Registration successful! Please log in.');
+        return redirect()->to(route('user.login', ['type' => 'login']));
+    }
 }

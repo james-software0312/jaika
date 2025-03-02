@@ -6,6 +6,7 @@ use App\Events\ProductOrdered;
 use App\Mail\PlaceOrder;
 use App\Product\Product;
 use App\Product\ProductSellInfo;
+use App\StockItemModel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
@@ -43,6 +44,7 @@ class ProductOrderMailUser
             $products = Product::whereIn('id', array_keys($payment_order_details))->get();
             foreach ($payment_order_details as $key => $order_items) {
                 $product = $products->find($key);
+                $stockitem = StockItemModel::where('product_id', $product->id)->first();
                 foreach ($order_items as $item) {
                     $price = isset($item['attributes']) && isset($item['attributes']['price'])
                                 ? $item['attributes']['price']
@@ -51,7 +53,11 @@ class ProductOrderMailUser
                     $order_details[] = [
                         'name' => optional($product)->title. " " . getItemAttributesName($item['attributes']),
                         'quantity' => $item['quantity'],
-                        'price' => $price
+                        'price' => $price,
+                        'code' => $stockitem->code,
+                        'size' => $stockitem->size,
+                        'color' => $stockitem->color,
+                        'image' => $stockitem->photo,
                     ];
                 }
             }

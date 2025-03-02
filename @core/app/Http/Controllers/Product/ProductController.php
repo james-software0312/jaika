@@ -216,7 +216,7 @@ class ProductController extends Controller
             'title' => 'required|string|max:191',
             // 'summary' => 'equired|string',
             // 'description' => 'required|string',
-            'category_id' => 'required|string',
+            // 'category_id' => 'required|string',
             'sub_category_id' => 'nullable|array',
             'image' => 'required|string|max:191',
             'image_gallery' => 'nullable|string',

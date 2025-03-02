@@ -104,7 +104,7 @@ class FrontendUserManageController extends Controller
             'country' => $request->country,
             'phone' => $request->phone,
             'vat_number' => $request->vat_number,
-            'without_vat_number' =>$request->without_vat_number,
+            // 'without_vat_number' =>$request->without_vat_number,
             'password' => Hash::make($request->password)
         ]);
 

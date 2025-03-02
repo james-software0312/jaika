@@ -166,9 +166,8 @@ class ProductSellPaymentController extends Controller
             $selected_shipping_cost = $shipping_info['cost'];
             $shipment_tax_applicable = $shipping_info['is_taxable'];
         }
-
         $checkout_image_path = "";
-
+        
         // check if shipping is taxable
         if ($shipment_tax_applicable) {
             // if shipment is taxable (is_taxable), calculate tax with shipping
@@ -178,9 +177,9 @@ class ProductSellPaymentController extends Controller
             // else, only calculate subtotal
             $tax_amount = CartAction::getCheckoutTaxAmount($subtotal, $request->country, $request->state);
         }
-
+        
         $total = $subtotal + $selected_shipping_cost + $tax_amount - $coupon_amount;
- 
+        
         $payment_meta = [
             'total' => (string) round($total, 2),
             'subtotal' => (string) round($subtotal, 2),
@@ -239,7 +238,6 @@ class ProductSellPaymentController extends Controller
             $contact = ContactModel::where('email', $order_details->email)->first();
         }
 
-        
         $cart_items = json_decode($order_details->order_details, true);
         $product = '';
         $data = [];
@@ -259,7 +257,7 @@ class ProductSellPaymentController extends Controller
                         'contactid' =>  $contact->id,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now(),
-                        'unitid' => $stockItem->unitid,
+                        'unitid' => 2,
                         'reference' => $ref,
 
                     ]);
@@ -279,6 +277,7 @@ class ProductSellPaymentController extends Controller
             'sh_sellId' => $product_sell_info->id,
             'withinvoice' => 1
         ]));
+        
         
         CartAction::storeItemSoldCount($all_cart_items, $products);
         try{

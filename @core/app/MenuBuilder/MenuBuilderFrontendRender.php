@@ -42,7 +42,7 @@ class MenuBuilderFrontendRender
                     
                     continue;
                 }
-                $output .= $this->render_menu_item($menu_item,$this->page_id,$default_lang);
+                if($this->page_id !=177)$output .= $this->render_menu_item($menu_item,$this->page_id,$default_lang)  ;
             }
         }
 

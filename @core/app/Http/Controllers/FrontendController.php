@@ -26,6 +26,8 @@ use App\Blog;
 use App\BlogCategory;
 use App\Campaign\Campaign;
 use App\ContactModel;
+use App\ColorModel;
+use App\SizeModel;
 use App\HeaderSlider;
 use App\KeyFeatures;
 use App\PageBuilder\Services\ProductRenderServices;
@@ -59,6 +61,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Svg\Tag\Image;
+
 
 class FrontendController extends Controller
 {
@@ -572,6 +575,21 @@ class FrontendController extends Controller
         $categories = $this->buildCategoryTree($allCategories);
         $all_category = ProductCategory::select("id","title")->where('status', 'publish')->with('subcategory')->get();
         $all_attributes = ProductAttribute::all();
+        // dd($all_attributes);
+        $colors = ColorModel::all();
+        $color = '';
+        $size = '';
+        foreach($colors as $c) {
+            $color .= '"'. $c['name'] . '",';
+        }
+        $color = rtrim($color, ',');
+        $all_attributes[0]['terms'] = '['.$color .']';
+        $sizes = SizeModel::all();
+        foreach($sizes as $si) {
+            $size .= '"'. $si['name'] . '",';
+        }
+        $size = rtrim($size, ',');
+        $all_attributes[1]['terms'] = '['.$size .']';
         $all_tags = Tag::all();
         $maximum_available_price = Product::query()->max('price');
         $sub_cat_details = ProductSubCategory::with('category')->find($request->subcat);
@@ -584,10 +602,14 @@ class FrontendController extends Controller
 
         $display_item_count = $request->count ?? get_static_option('default_item_count') ?? 5;
         $all_products = Product::query()
+        // ->leftJoin(DB::raw('`' . env('DB_WH_PREFIX') . 'stockitem` as ddd'), 'products.id', '=', DB::raw('wh_stockitem.product_id'))
+        ->leftJoin(DB::raw('wh_stockitem'), 'products.id', '=', DB::raw('wh_stockitem.product_id'))
+        // ->select('products.*')
+        // ->select(DB::raw('`' . env('DB_WH_PREFIX') . 'stockitem.color,stockitem.size`'))
         ->with('inventory')
         ->withAvg('rating', 'rating')
         ->where('status', 'publish');
-
+        // dd($all_products);
         // search title
         if ($request->q) {
             $all_products->where('title', 'LIKE', "%$request->q%");
@@ -604,20 +626,23 @@ class FrontendController extends Controller
         }
 
         if ($min_price && $min_price > 0) {
-            $all_products->where('price', '>=', $min_price);
+            $all_products->where('products.price', '>=', $min_price);
         }
 
         if ($max_price) {
-            $all_products->where('price', '<=', $max_price);
+            $all_products->where('products.price', '<=', $max_price);
         }
 
         // filter by attribute
         if ($request->attr) {
+            // dd($request->attr);
             $filter_attributes = json_decode($request->attr, true);
             if (is_array($filter_attributes)) {
                 foreach ($filter_attributes as $attr) {
                     if (isset($attr['id']) && isset($attr['attribute'])) {
-                        $all_products->where('attributes', 'LIKE', "%{$attr['id']}%{$attr['attribute']}%");
+                        // dd($attr['attribute']);
+                        $all_products->where(DB::raw('wh_stockitem.size'), '=', $attr['attribute'])
+                        ->orwhere(DB::raw('wh_stockitem.color'), '=', $attr['attribute']);
                     }
                 }
             }

@@ -200,6 +200,12 @@
                                             <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword15">
                                         </div>
                                         <div class="form-group form-check col-12">
+                                            <input type="checkbox" class="form-check-input" name="business" id="business">
+                                            <label for="business">{{ __('Business') }}</label>
+                                        </div>
+                                        <div class="business_form row">
+                                        </div>
+                                        <div class="form-group form-check col-12">
                                             <input type="checkbox" class="form-check-input" name="agree_terms" id="Check11">
                                             <label class="form-check-label" for="Check11">
                                                 {{ __('By creating an account, you agree to the') }}
@@ -270,7 +276,13 @@
 
     <x-sweet-alert-msg/>
     <script src="{{ asset('assets/common/js/toastr.min.js') }}"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+<!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
+         @if (session('success'))
+            toastr.success("{{ session('success') }}");
+        @endif
         (function ($) {
             'use strict'
             $(document).ready(function () {
@@ -285,7 +297,19 @@
     <script>
         (function($) {
             "use strict";
+            $(document).on('click', '#business', function (e) {
+                if ($(this).is(':checked')) {
+                    // Checkbox is checked
+                    console.log('Checkbox is checked');
+                    $('.business_form').html('<div class="form-group col-lg-6 col-12"><label for="company">{{ __("Company") }}</label><input type="text" name="company" class="form-control" id="company"></div><div class="form-group col-lg-6 col-12"><label for="vat">{{ __("Vat") }}</label><input type="number" name="vat" class="form-control" id="vat"></div>');
+                } else {
+                    // Checkbox is not checked
+                    console.log('Checkbox is unchecked');
+                    $('.business_form').html('');
+                }
+            })
             $(document).on('click', '#login_btn', function (e) {
+                console.log(123);
                 var formContainer = $('#login_form_order_page');
                 var el = $(this);
                 var username = $('#login_form_order_page #login_email').val();

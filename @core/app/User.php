@@ -38,7 +38,9 @@ class User extends Authenticatable
         'google_id',
         'country_code',
         'vat_number',
-        'without_vat_number'
+        'without_vat_number',
+        'business',
+        'company'
     ];
 
     /**

@@ -187,7 +187,7 @@
                                     </div>
                                 </div>
                                 <div class="cart-option mt-4">
-                                    <a href="#" data-id="{{ $product->id }}" class="cart add_to_cart">{{ __('add to cart') }}</a>
+                                    <a href="#" data-id="{{ $product->id }}" class="cart add_to_cart" style="background-color: #FF6280; color:white;">{{ __('add to cart') }}</a>
                                     {{-- <a href="#" data-id="{{ $product->id }}" class="cart add_to_wishlist">{{ __('wishlist') }}</a>
                                     <a href="#" data-id="{{ $product->id }}" class="cart add_to_compare_ajax">{{ __('Compare') }}</a>
                                     <a href="#" data-id="{{ $product->id }}" class="cart buy_now">{{ __(key: 'Buy Now') }}</a> --}}
@@ -225,7 +225,13 @@
 
                         @if ($product->inventory)
                             <div class="product-attr">
-                                {{ __('SKU: ')}}{{ optional($product->inventory)->sku }}
+                                {{ __('SKU')}}: &nbsp;  <span style="color:#28a745"> {{ optional($product->inventory)->code }}</span>
+                            </div>
+                            <div class="product-attr">
+                                {{ __('Size')}}: &nbsp; <span style="color: blueviolet;"> {{ optional($product->inventory)->size }}</span>
+                            </div>
+                            <div class="product-attr">
+                                {{ __('Color')}}: &nbsp; <span style="color: blueviolet;">{{ optional($product->inventory)->color }}</span>
                             </div>
                         @endif
                     </div>

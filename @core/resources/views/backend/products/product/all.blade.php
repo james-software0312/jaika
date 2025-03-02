@@ -75,9 +75,9 @@
                                             @can('product-edit')
                                             <x-table.btn.edit :route="route('admin.products.edit', $product->id)" />
                                             @endcan
-                                            @can('product-clone')
+                                            {{-- @can('product-clone')
                                             <x-table.btn.clone :route="route('admin.products.clone', $product->id)" :id="$product->id" />
-                                            @endcan
+                                            @endcan --}}
                                             @can('product-view')
                                             <x-table.btn.view :route="route('frontend.products.single', $product->slug)" />
                                             @endcan

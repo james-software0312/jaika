@@ -15,7 +15,8 @@
         <p class="info">{{ Str::limit(html_entity_decode($product->summary), 130) }}</p>
         <div class="pricing">
             <span class="price">{{ float_amount_with_currency_symbol($product->sale_price) }}</span>
-             @if(!empty($product->price) && $product->price != 0)
+             {{-- @if(!empty($product->price) && $product->price != 0) --}}
+             @if($product->sale_price < $product->price)
             <del> {{ float_amount_with_currency_symbol($product->price) }}</del>
             @endif
         </div>

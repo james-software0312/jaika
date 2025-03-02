@@ -1,5 +1,5 @@
 <h4 class="title">
-    {!! filter_static_option_value('order_summary_title', $setting_text, __('your order')) !!}
+    {!! __('your order') !!}
 </h4>
 <div class="sum-bar"></div>
 @foreach ($all_cart_items as $key => $item)
@@ -34,7 +34,7 @@
 
 <div class="sum-bar"></div>
 <div class="cost-name-amount sub-total-wrap">
-    <span class="total">{!! filter_static_option_value('subtotal_text', $setting_text, __('sub total')) !!}:</span>
+    <span class="total">{!! __('sub total:') !!}:</span>
     <span class="total-amount" id="subtotal" data-amount="{{ $subtotal }}">{{ float_amount_with_currency_symbol($subtotal) }}</span>
 </div>
 <div class="sum-bar"></div>
@@ -53,7 +53,7 @@
                         value="{{ $default_shipping->id }}"
                         @if($default_shipping->id) checked @endif
                 >
-                    {{ $default_shipping->name }}
+                    {{ __($default_shipping->name) }}
 
                 @if(optional($default_shipping->availableOptions)->minimum_order_amount ?? 0)
                     <small class="min-order-text">{{ __("Minimum order amount: ") }}
@@ -72,20 +72,20 @@
         @endif
     </div>
     <div class="shipping-cost">
-        <span class="total shipping">{!! filter_static_option_value('shipping_text', $setting_text, __('shipping')) !!}:</span>
+        <span class="total shipping">{!!  __('shipping:') !!}:</span>
         <span class="total-amount" id="shipping_charge">{{ float_amount_with_currency_symbol($default_shipping_cost) }}</span>
     </div>
 </div>
 <div class="sum-bar"></div>
 <div class="cost-name-amount sub-total-wrap">
-    <span class="total vat">{!! filter_static_option_value('vat_text', $setting_text, __('vat')) !!}:</span>
+    <span class="total vat">{!! __('vat') !!}:</span>
     <span class="total-amount">(+)<span id="tax_amount" data-tax-percentage="{{ $tax_percentage }}">{{ float_amount_with_currency_symbol($tax) }}</span></span>
 </div>
 <div id="discount_summery" style="display: none">
     <div class="sum-bar"></div>
     <div class="cost-name-amount sub-total-wrap">
-        <span class="total discount">{!! filter_static_option_value('discount_text', $setting_text, __('discount')) !!} 
-        <span class="ex">{!! filter_static_option_value('coupon_text', $setting_text, __('coupon')) !!}</span></span>
+        <span class="total discount">{!! __('discount') !!} 
+        <span class="ex">{!!  __('coupon') !!}</span></span>
         <strong>
             (-)<span class="total-amount" id="coupon_amount">
                 {{ float_amount_with_currency_symbol($coupon_amount) }}
@@ -95,7 +95,7 @@
 </div>
 <div class="sum-bar"></div>
 <div class="cost-name-amount total-wrap">
-    <span class="total"> {!! filter_static_option_value('total_text', $setting_text, __('Total')) !!}:</span>
+    <span class="total"> {!! __('Total') !!}:</span>
     <span class="total-amount">
         <span class="ex"
             id="total_amount">{{ float_amount_with_currency_symbol($total) }}</span>

@@ -68,7 +68,6 @@ class PaymentHelper
         ];
 
 
-
         if ($product_payment_info->payment_gateway === 'cash_on_delivery') {
             event(new ProductOrdered([
                 'order_id' => $product_payment_info->id,
