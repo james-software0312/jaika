@@ -73,7 +73,9 @@ function check_image_extension($file)
 }
 function render_image_markup_by_attachment_id($id, $class = null, $size = 'full')
 {
-    if (empty($id)) return '';
+    
+    if (empty($id)) $id = 903;
+    // if (empty($id)) return '';
     $output = '';
     
     // dd($size);

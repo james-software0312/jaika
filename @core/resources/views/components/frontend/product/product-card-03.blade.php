@@ -24,7 +24,7 @@
                 @endif
             </span>
             <span class="product-bg-img bg-position-bottom"
-                  {!! render_background_image_markup_by_attachment_id($item->image) !!}
+                  {!! render_background_image_markup_by_attachment_id($item->image,'grid') !!}
                   data-width="100%" data-height="380">
             </span>
             <div class="hover">

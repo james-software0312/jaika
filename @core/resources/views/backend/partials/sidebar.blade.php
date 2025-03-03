@@ -485,7 +485,7 @@
                         </li>
                     @endcanany
 
-                    {{-- @canany(['page-settings-home-page-manage', 'page-settings-about-page-manage',
+                    @canany(['page-settings-home-page-manage', 'page-settings-about-page-manage',
                         'page-settings-blog-page-manage', 'page-settings-contact-page-manage',
                         'page-settings-faq-page-manage', 'page-settings-error-page-manage',
                         'page-settings-maintain-page-manage'])
@@ -570,7 +570,7 @@
                                         </ul>
                                     </li>
                                 @endcan
-                                @can('page-settings-blog-page-manage')
+                                {{-- @can('page-settings-blog-page-manage')
                                     <li class="main_dropdown @if (request()->is('admin-home/page-builder/blog-page')) active @endif ">
                                         <a href="javascript:void(0)" aria-expanded="true">
                                             {{ __('Blogs Page Manage') }}
@@ -581,7 +581,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                @endcan
+                                @endcan --}}
                                 @can('page-settings-contact-page-manage')
                                     <li class="main_dropdown @if (request()->is('admin-home/page-builder/contact-page')) active @endif">
                                         <a href="javascript:void(0)" aria-expanded="true">
@@ -623,7 +623,7 @@
                                 @endcan
                             </ul>
                         </li>
-                    @endcanany --}}
+                    @endcanany
 
                     @canany(['general-settings-site-identity', 'general-settings-basic-settings',
                         'general-settings-color-settings', 'general-settings-typography', 'general-settings-seo-settings',
