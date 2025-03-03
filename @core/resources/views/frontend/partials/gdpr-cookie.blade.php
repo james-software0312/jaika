@@ -8,19 +8,24 @@
             delayTime = delayTime ? delayTime : 4000;
 
             $('body').ihavecookies({
-                title: "{{get_static_option('site_gdpr_cookie_title')}}",
-                message: "{{get_static_option('site_gdpr_cookie_message')}}",
+                title: "Polityka Prywatności",
+                message: "Strona korzysta z plików cookies zgodnie z Polityką Prywatności w celu realizacji usług. Korzystanie z witryny oznacza, że będą one umieszczane w Twoim urządzeniu końcowym. Możesz określić warunki przechowywania lub dostępu do plików cookies w Twojej przeglądarce",
                 expires: "{{get_static_option('site_gdpr_cookie_expire')}}",
                 link: "{{$gdpr_cookie_link}}",
                 delay: delayTime,
-                moreInfoLabel: "{{get_static_option('site_gdpr_cookie_more_info_label')}}",
-                acceptBtnLabel: "{{get_static_option('site_gdpr_cookie_accept_button_label')}}",
-                advancedBtnLabel: "{{get_static_option('site_gdpr_cookie_decline_button_label')}}"
+                moreInfoLabel: "  ",
+                acceptBtnLabel: "Akceptuje",
+                advancedBtnLabel: "Odrzuć wszystko"
             });
             $('body').on('click', '#gdpr-cookie-close', function (e) {
                 e.preventDefault();
                 $(this).parent().remove();
             });
         });
-    </script>
+        // advancedBtnLabel: "{{get_static_option('site_gdpr_cookie_decline_button_label')}}"
+        // title: "{{get_static_option('site_gdpr_cookie_title')}}",
+        // message: "{{get_static_option('site_gdpr_cookie_message')}}",
+        // moreInfoLabel: "{{get_static_option('site_gdpr_cookie_more_info_label')}}",
+        // acceptBtnLabel: "{{get_static_option('site_gdpr_cookie_accept_button_label')}}",
+        </script>
 @endif

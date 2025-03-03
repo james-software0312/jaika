@@ -152,16 +152,17 @@ class ProductFilterStyleOne extends PageBuilderBase
         $padding_top = SanitizeInput::esc_html($settings['padding_top']);
         $padding_bottom = SanitizeInput::esc_html($settings['padding_bottom']);
         $product_items = $settings['items'] ?? [];
+        // dd($settings);
+        // dd($product_items);
         $product_categories = $settings['product_categories'] ?? [];
 
         $products = Product::query()->withAvg('rating', 'rating', 'campaignProduct')->with('inventory');
-
-        if (!empty($product_items)) {
-            $products->whereIn('id', $product_items);
-        }
-
+        // if (!empty($product_items)) {
+        //     $products->whereIn('id', $product_items);
+        // }
+        // dd($products->get());
         if (!empty($product_categories)) {
-            $products->whereIn('category_id', $product_categories);
+            $products->whereIn('category_id', $product_categories)->limit(18);
         }
 
         $products->where(['status' => 'publish']);
@@ -245,9 +246,13 @@ HTML;
 
         $image_markup = render_image_markup_by_attachment_id($item->image, '', 'grid');
         $title_markup = "<h4 class='product-title'><a href='{$route}'>{$item->title}</a></h4>";
-        $price = $price > 0 ? float_amount_with_currency_symbol($price) : '';
-        $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' . float_amount_with_currency_symbol($sale_price) . '</li><li class="price"><del>' . $price . '</del></li></ul></div>';
-
+        // $price = $price > 0 ? float_amount_with_currency_symbol($price) : '';
+        $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' . float_amount_with_currency_symbol($sale_price) . '</li>';
+        if($price > $sale_price) {
+            $price_markup .= '<li class="price"><del>' . $price . '</del></li></ul></div>';
+        } else {
+            $price_markup .= '</ul></div>';
+        }
         $attributes = $item->attributes ? json_decode($item->attributes, true) : null;
 
         $add_compare_markup = '<a href="#" data-id="'.$item->id.'" class="add_to_compare_ajax"> <i class="las la-retweet icon"></i></a>';
@@ -306,7 +311,7 @@ HTML;
 HTML;
         
         return <<<HTML
-        <div class="col-sm-6 col-md-4 col-lg-3 new gap-5">
+        <div class="col-sm-6 col-md-4 col-lg-2 new gap-5">
             <div class="single-our-store-wrapper single-new-design-wrapper single-product-item" >
                 <div class="product-img-box">
                     {$campaign_percentage_markup}

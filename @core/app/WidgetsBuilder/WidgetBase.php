@@ -85,7 +85,7 @@ abstract class WidgetBase
      * */
 
     public function get_settings()
-    {
+    {   
         $widget_data = !empty($this->args['id']) ? Widgets::find($this->args['id']) : [];
         $widget_data = !empty($widget_data) ? unserialize($widget_data->widget_content,['class' => false]) : [];
         return $widget_data;

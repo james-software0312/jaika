@@ -51,6 +51,7 @@ class ContactInfoWidget extends WidgetBase
         $output .= '<ul class="info-list">';
 
         if (!empty($location)) {
+            $location = "ul. Nadrzeczna 16, 05-552 Wólka Kosowska";
             $output .= 
             '<li class="info-item">
                 <a href="#"><i class="las la-map-marker icon icon-address"></i>
@@ -69,6 +70,7 @@ class ContactInfoWidget extends WidgetBase
         }
 
         if (!empty($email)) {
+            $email = "info@website.com";
             $output .= 
             '<li class="info-item">
                 <a href="#"> <i class="lar la-envelope icon icon-address"></i>
