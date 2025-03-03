@@ -45,7 +45,7 @@ class ContactInfoWidget extends WidgetBase
         $output = $this->widget_before(); //render widget before content
 
         if (!empty($widget_title)) {
-            $output .= '<h4 class="widget-title">' . purify_html($widget_title) . '</h4>';
+            $output .= '<h4 class="widget-title">' . purify_html(__($widget_title)) . '</h4>';
         }
 
         $output .= '<ul class="info-list">';

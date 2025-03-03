@@ -55,7 +55,7 @@ class NavigationMenuWidget extends WidgetBase
         $output = $this->widget_before(); //render widget before content
 
         if (!empty($widget_title)){
-            $output .= '<h4 class="widget-title">'.$widget_title.'</h4>';
+            $output .= '<h4 class="widget-title">'. __($widget_title).'</h4>';
         }
         $output .= '<ul class="info-list navigation-container">';
         $output .= render_frontend_menu($menu_id);

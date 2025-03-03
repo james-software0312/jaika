@@ -48,11 +48,11 @@ class NewsletterWidget extends WidgetBase
         // Blade::
 
         if (!empty($widget_title)) {
-            $output .= '<h4 class="widget-title">'.purify_html($widget_title).'</h4>';
+            $output .= '<h4 class="widget-title">'.purify_html(__($widget_title)).'</h4>';
         }
 
         if (!empty($description)) {
-            $output .= '<p class="info">'.purify_html($description).'</p>';
+            $output .= '<p class="info">'.purify_html(__($description)).'</p>';
         }
 
         $output .= 

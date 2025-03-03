@@ -104,14 +104,16 @@ class PaymentGatewaySetup
         if (!empty(get_static_option('cash_on_delivery_gateway'))) {
             $output .= '<li data-gateway="cash_on_delivery" ><div class="img-select">';
             $output .= render_image_markup_by_attachment_id(get_static_option('cash_on_delivery_preview_logo'));
+            // $output .= '<a href="#"  class="cart add_to_cart" style="background-color: #FF6280; color:white; padding:10px;">'. __("cash") .'</a>';
             $output .= '</div></li>';
         }
-
+        
         foreach ($all_gateway as $gateway) {
             if (!empty(get_static_option($gateway . '_gateway'))) :
                 $class = (get_static_option('site_default_payment_gateway') == $gateway) ? 'class="selected"' : '';
-
+                
                 $output .= '<li data-gateway="' . $gateway . '" ' . $class . '><div class="img-select">';
+                // $output .= '<a href="#"  class="cart add_to_cart" style="background-color: #FF6280; color:white;  padding:10px;">'. __("bank") .'</a>';
                 $output .= render_image_markup_by_attachment_id(get_static_option($gateway . '_preview_logo'));
                 $output .= '</div></li>';
             endif;

@@ -286,14 +286,14 @@
                         </a>
                     </li>
                     @endcan
-                    @can('product-attribute-list')
+                    {{-- @can('product-attribute-list')
                     <li class="{{ active_menu('admin-home/products/attributes') }}">
                         <a href="{{ route('admin.products.attributes.all') }}">
                             <i class="ti-menu"></i>
                             <span>{{ __('Attribute') }}</span>
                         </a>
                     </li>
-                    @endcan
+                    @endcan --}}
                     @can('product-rating-list')
                     <li class="{{ active_menu('admin-home/products/ratings') }}">
                         <a href="{{ route('admin.products.ratings.all') }}">
@@ -348,7 +348,7 @@
                         </ul>
                     </li>
 
-                    @canany(['blog-list', 'blog-category-list', 'blog-create', 'blog-page-settings',
+                    {{-- @canany(['blog-list', 'blog-category-list', 'blog-create', 'blog-page-settings',
                         'blog-single-page-settings'])
                         <li class="main_dropdown @if (request()->is(['admin-home/blog/*', 'admin-home/blog'])) active @endif ">
                             <a href="javascript:void(0)" aria-expanded="true"><i class="ti-write"></i>
@@ -378,7 +378,7 @@
                                 @endcan
                             </ul>
                         </li>
-                    @endcanany
+                    @endcanany --}}
                     @can('faq-list')
                         <li class="main_dropdown {{ active_menu('admin-home/faq') }}">
                             <a href="{{ route('admin.faq') }}" aria-expanded="true"><i class="ti-control-forward"></i>
@@ -485,7 +485,7 @@
                         </li>
                     @endcanany
 
-                    @canany(['page-settings-home-page-manage', 'page-settings-about-page-manage',
+                    {{-- @canany(['page-settings-home-page-manage', 'page-settings-about-page-manage',
                         'page-settings-blog-page-manage', 'page-settings-contact-page-manage',
                         'page-settings-faq-page-manage', 'page-settings-error-page-manage',
                         'page-settings-maintain-page-manage'])
@@ -623,7 +623,7 @@
                                 @endcan
                             </ul>
                         </li>
-                    @endcanany
+                    @endcanany --}}
 
                     @canany(['general-settings-site-identity', 'general-settings-basic-settings',
                         'general-settings-color-settings', 'general-settings-typography', 'general-settings-seo-settings',
