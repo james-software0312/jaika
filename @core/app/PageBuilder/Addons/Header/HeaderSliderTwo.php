@@ -126,7 +126,11 @@ class HeaderSliderTwo extends PageBuilderBase
             if (is_array($setting)){
                 $this->args['repeater'] = $setting;
                 $array_lang_item = $setting[array_key_last($setting)];
-                // dd($array_lang_item);
+                // $array_lang_item = [
+                //     0 => 907,
+                //     1 => 908,
+                //     2 => 909
+                // ];
                 if (!empty($array_lang_item) && is_array($array_lang_item) && count($array_lang_item) > 0) {
                     foreach ($array_lang_item as $index => $value) {
                         $output .= $this->render_slider_markup($index); // for multiple array index
@@ -150,12 +154,17 @@ HTML;
         $settings = $this->get_settings();
         $title_color = $settings['title_color'];
         $subtitle = $this->get_repeater_field_value('subtitle', $index);
+        // dd($index);
         $title = $this->get_repeater_field_value('title', $index);
         $button_text = $this->get_repeater_field_value('button_text', $index);
         $button_url = $this->get_repeater_field_value('button_url', $index);
         $button_icon = $this->get_repeater_field_value('button_icon', $index);
-        // dd($index); 
-        $background_image = render_background_image_markup_by_attachment_id($this->get_repeater_field_value('background_image', $index));
+        // dd($index);
+        $im = $this->get_repeater_field_value('background_image', $index); 
+        if($index == 0) $im = 907;
+        else if($index == 1) $im =908;
+        // $background_image = render_background_image_markup_by_attachment_id($this->get_repeater_field_value('background_image', $index));
+        $background_image = render_background_image_markup_by_attachment_id($im);
         $padding_top = SanitizeInput::esc_html($settings['padding_top']);
         $padding_bottom = SanitizeInput::esc_html($settings['padding_bottom']);
 
@@ -164,7 +173,6 @@ HTML;
             $icon_markup = !empty($button_icon) ? '<i class="'.$button_icon.'"></i>' : '';
             $button_markup = '<div class="btn-wrapper"> <a href="'.url($button_url).'" class="borderless-btn">'.$button_text.'</a></div>';
         }
-
         return <<<HTML
         <div class="header-area header-bg" {$background_image} data-padding-top="{$padding_top}" data-padding-bottom="{$padding_bottom}"> 
             <div class="container nav-container">

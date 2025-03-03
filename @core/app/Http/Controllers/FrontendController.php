@@ -76,7 +76,7 @@ class FrontendController extends Controller
         $default = StaticOption::where("option_name","default_home_page")->select("id","option_value")->first();
         if (!empty($page->option_value) && $default->option_value == "on") {
             // if you want to other theme, you have to use $page->option_value instead of 7
-            $page_post = Page::where('id', 7)->first();
+            $page_post = Page::where('id', $page->option_value)->first();
             // dd($page_post);
             return view('frontend.pages.dynamic-single', compact('page_post'));
         }
