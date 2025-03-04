@@ -61,10 +61,10 @@
             
             <div class="product-price-details">
                 <ul class="list">
-                    <li class="price">{{ float_amount_with_currency_symbol($sale_price) }}</li>
+                    <li class="price" style = "text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($sale_price) }}</li>
                     {{-- @if(!empty($item->price) && $item->price != 0) --}}
                     @if($sale_price < $item->price)
-                        <li class="price"><del>{{ float_amount_with_currency_symbol($item->price) }}</del></li>
+                        <li class="price" style = "text-transform: lowercase!important;"><del>{{ float_amount_with_currency_symbol($item->price) }}</del></li>
                     @endif
                         
                     

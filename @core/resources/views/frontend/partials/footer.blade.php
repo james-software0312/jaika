@@ -77,10 +77,10 @@ $page_post = $page_post ?? (object)['footer_variant' => null];
             </div>
             <div class="pricing">
                 <ul class="list">
-                    <li class="price">
+                    <li class="price" style = "text-transform: lowercase!important;">
                         <del class="main_price"></del>
                     </li>
-                    <li class="price sale_price"></li>
+                    <li class="price sale_price" style = "text-transform: lowercase!important;"></li>
                 </ul>
             </div>
             <p class="info">{{ __('Product Info') }}</p>

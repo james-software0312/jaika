@@ -192,10 +192,10 @@ class ProductSliderStyleTwo extends PageBuilderBase
 
         // dd($sale_price);
         if($item->sale_price < $item->price) {
-            $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' . float_amount_with_currency_symbol($sale_price) . '</li><li class="price"><del>' . $price . '</del></li></ul></div>';
+            $price_markup = '<div class="product-price-details"><ul class="list"><li class="price" style = "text-transform: lowercase!important;">' . float_amount_with_currency_symbol($sale_price) . '</li><li class="price"><del>' . $price . '</del></li></ul></div>';
             // $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' . $sale_price .' '.  __('PLN') . ' </li><li class="price"><del>' . $item->price .' '.  __('PLN') . '</del></li></ul></div>';
         } else {
-            $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' .  float_amount_with_currency_symbol($sale_price) .'</li></ul></div>';
+            $price_markup = '<div class="product-price-details"><ul class="list"><li class="price" style = "text-transform: lowercase!important;">' .  float_amount_with_currency_symbol($sale_price) .'</li></ul></div>';
         }
 
         $add_to_cart_markup = "";

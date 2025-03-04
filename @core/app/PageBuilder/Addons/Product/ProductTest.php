@@ -219,7 +219,7 @@ HTML;
         $campaign_percentage = !is_null($campaign_product) ? getPercentage($item->sale_price, $sale_price) : false;
 
         $price = $price > 0 ? float_amount_with_currency_symbol($price) : '';
-        $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' . float_amount_with_currency_symbol($sale_price) . '</li><li class="price"><del>' . $price . '</del></li></ul></div>';
+        $price_markup = '<div class="product-price-details"><ul class="list"><li class="price" style = "text-transform: lowercase!important;">' . float_amount_with_currency_symbol($sale_price) . '</li><li class="price" style = "text-transform: lowercase!important;"><del>' . $price . '</del></li></ul></div>';
 
         $add_to_cart_markup = "";
         if ($item->id) {

@@ -150,7 +150,7 @@ class ProductSaleStyleOne extends PageBuilderBase
 
             $end_date = $campaign_product->end_date ?? "";
             
-            $regular_price_markup = !empty($price) && $price > 0 ? '<li class="price"> <del>'.float_amount_with_currency_symbol($price).'</del></li>' : '';
+            $regular_price_markup = !empty($price) && $price > 0 ? '<li class="price" style = "text-transform: lowercase!important;"> <del>'.float_amount_with_currency_symbol($price).'</del></li>' : '';
 
             $campaign_product_markup .= <<<HTML
 <div class="col-12 col-sm-8 col-md-6 col-lg-4">
@@ -184,17 +184,17 @@ class ProductSaleStyleOne extends PageBuilderBase
             </h3>
             <div class="product-price-details">
                 <ul class="list">
-                    <li class="price">{$sale_price}</li>
+                    <li class="price"  style = "text-transform: lowercase!important;">{$sale_price}</li>
                     
                    {$regular_price_markup}
                     
                 </ul>
                 <div class="hover">
                     <ul class="list">
-                        <li class="price">
+                        <li class="price" style = "text-transform: lowercase!important;">
                             {$add_to_cart_markup}
                         </li>
-                        <li class="price">
+                        <li class="price" style = "text-transform: lowercase!important;">
                             <a href="#" id="quickview" class="quick-view" {$quick_view_data}>Quick View</a>
                         </li>
                     </ul>

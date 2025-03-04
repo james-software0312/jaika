@@ -302,10 +302,10 @@
                             
                                     $terms_text = str_replace(['[lnk]', '[/lnk]'], ["<a class='terms' href='$checkout_page_terms_link_url'>", "</a>"], __($checkout_page_terms_text));
                                 @endphp
-                                <input type="checkbox" class="form-check-input" name="agree" id="Checkhh">
+                                {{-- <input type="checkbox" class="form-check-input" name="agree" id="Checkhh">
                                 <label class="form-check-label" for="Checkhh">
                                     {!! __($terms_text) !!}
-                                </label>
+                                </label> --}}
                             </div>
                             <div class="btn-wrapper btn-top">
                                 <button type="submit" class="default-btn">{!!  __('Proceed to checkout') !!}</button>

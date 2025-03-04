@@ -126,10 +126,10 @@
                     $campaign_percentage = $campaign_product ? getPercentage($product->sale_price, $sale_price) : false;
                     @endphp
                     <div class="price-wrap">
-                        <span class="price" data-main-price="{{ $sale_price }}" id="price">{{ float_amount_with_currency_symbol($sale_price) }}</span>
+                        <span class="price" data-main-price="{{ $sale_price }}" id="price" style = "text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($sale_price) }}</span>
                         {{-- @if(!empty($deleted_price) && $deleted_price != 0) --}}
                         @if($sale_price < $deleted_price)
-                        <del class="del-price">{{ float_amount_with_currency_symbol($deleted_price) }}</del>
+                        <del class="del-price"  style = "text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($deleted_price) }}</del>
                         @endif
                         @if($campaign_percentage)
                             <span class="discount-tag">-{{ round($campaign_percentage, 2) }}%</span>
@@ -427,10 +427,10 @@
                             $related_deleted_price = $campaign_product ? $product->sale_price : $product->price;
                             @endphp
                             <ul class="list">
-                                <li class="price">{{ float_amount_with_currency_symbol($related_sale_price) }}</li>
+                                <li class="price" style = "text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($related_sale_price) }}</li>
                                 {{-- @if(!empty($related_deleted_price) && $related_deleted_price != 0) --}}
                                 @if($related_deleted_price > $related_sale_price)
-                                <li class="price"><del>{{ float_amount_with_currency_symbol($related_deleted_price) }}</del></li>
+                                <li class="price" style = "text-transform: lowercase!important;"><del>{{ float_amount_with_currency_symbol($related_deleted_price) }}</del></li>
                                 @endif
                             </ul>
                         </div>

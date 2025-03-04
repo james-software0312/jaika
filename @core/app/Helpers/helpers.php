@@ -468,6 +468,7 @@ function float_amount_with_currency_symbol($amount, $text = false)
     //     $return_val = $amount . $symbol;
     // }
     $return_val = $amount . ' zł';
+    // dd($return_val);
 
     return $return_val;
 }

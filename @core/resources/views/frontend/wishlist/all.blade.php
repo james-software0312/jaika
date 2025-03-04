@@ -64,7 +64,7 @@
                                     </td>
                                     <td>
                                         <div class="price-box">
-                                            <span class="price">{{ amount_with_currency_symbol($product->sale_price) }}</span>
+                                            <span class="price"  style = "text-transform: lowercase!important;">{{ amount_with_currency_symbol($product->sale_price) }}</span>
                                         </div>
                                     </td>
                                     <td>
@@ -74,7 +74,7 @@
                                     </td>
                                     <td>
                                         <div class="total">
-                                            <span class="price">{{ amount_with_currency_symbol($product->sale_price * $wishlist_item['quantity']) }}</span>
+                                            <span class="price" style = "text-transform: lowercase!important;">{{ amount_with_currency_symbol($product->sale_price * $wishlist_item['quantity']) }}</span>
                                             <a href="#" class="remove_wishlist_item" data-id="{{ $wishlist_item['id'] }}" data-attr="{{ json_encode($wishlist_item['attributes']) }}">
                                                 <i class="las la-trash"></i>
                                             </a>

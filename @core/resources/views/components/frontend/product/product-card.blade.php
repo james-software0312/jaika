@@ -64,10 +64,10 @@
             <h3 class="product-title"><a href="{{ route('frontend.products.single', $product->slug) }}">{{ Str::limit(html_entity_decode($product->title), 23) }}</a></h3>
             <div class="product-price-details">
                 <ul class="list">
-                    <li class="price">{{ float_amount_with_currency_symbol($sale_price) }}</li>
+                    <li class="price" style = "text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($sale_price) }}</li>
                     {{-- @if(!empty($deleted_price) && $deleted_price != 0) --}}
                     @if($sale_price < $deleted_price)
-                    <li class="price"><del>{{ float_amount_with_currency_symbol($deleted_price) }}</del></li>
+                    <li class="price" style = "text-transform: lowercase!important;"><del>{{ float_amount_with_currency_symbol($deleted_price) }}</del></li>
                     @endif
                 </ul>
             </div>

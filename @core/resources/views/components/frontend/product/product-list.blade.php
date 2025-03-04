@@ -14,10 +14,10 @@
         <h3 class="product-title"><a href="{{ route('frontend.products.single', $product->slug) }}">{{ html_entity_decode(Str::limit($product->title, 23)) }}</a></h3>
         <p class="info">{{ Str::limit(html_entity_decode($product->summary), 130) }}</p>
         <div class="pricing">
-            <span class="price">{{ float_amount_with_currency_symbol($product->sale_price) }}</span>
+            <span class="price" style = "text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($product->sale_price) }}</span>
              {{-- @if(!empty($product->price) && $product->price != 0) --}}
              @if($product->sale_price < $product->price)
-            <del> {{ float_amount_with_currency_symbol($product->price) }}</del>
+            <del style = "text-transform: lowercase!important;"> {{ float_amount_with_currency_symbol($product->price) }}</del>
             @endif
         </div>
         <div class="cart-option">

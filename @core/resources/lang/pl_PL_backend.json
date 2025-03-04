@@ -271,6 +271,7 @@
 
 
     "Badge": "Odznaka",
+    "bank": "Przelew bankowy",
     "Bank Transfer Description": "Opis Przelewu Bankowego",
     "Bank Transfer Image": "Obraz Przelewu Bankowego",
     "Bank Transfer Logo": "Logo Przelewu Bankowego",
@@ -328,6 +329,7 @@
     "Cart Products": "Produkty w Koszyku",
     "cart total": "suma koszyka",
     "Cart Total Title": "Tytuł Całkowitej Sumy Koszyka",
+    "cash": "Kurier pobranie",
     "Cash On Delivery Logo": "Logo 'Za Pobraniem'",
     "Cash On Delivery Settings (only for product order)": "Ustawienia 'Za Pobraniem' (tylko dla zamówień produktów)",
     "category": "kategoria",
@@ -643,6 +645,7 @@
     "Get In Touch Form Builder": "Kreator formularza kontaktowego",
     "Get In Touch Form Success Message": "Wiadomość o pomyślnym przesłaniu formularza kontaktowego",
     "Get In Touch Mail": "Mail kontaktowy",
+    "Get in Touch": "Kontaktowy",
     "Global Email": "Globalny e-mail",
     "Go Back": "Wróć",
     "Go to Dashboard": "Przejdź do pulpitu",
@@ -928,6 +931,7 @@
     "Order Status:": "Status zamówienia:",
     "Order Summary": "Podsumowanie zamówienia",
     "Order Summery": "Podsumowanie zamówienia",
+    "Order Successful": "Zamówienie powiodło się",
     "Ordered Products": "Zamówione produkty",
     "Out of Stock": "Brak w magazynie",
     "Package Description": "Opis pakietu",

@@ -45,7 +45,7 @@
                                         </div>
                                         <div class="info-box">
                                             <p class="title"><a href="{{ route('frontend.products.single', $product->slug) }}">{{ $product->title }}</a></p>
-                                            <p class="price">{{ float_amount_with_currency_symbol($product->sale_price) }}</p>
+                                            <p class="price" style = "text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($product->sale_price) }}</p>
                                             <a href="#" class="remove-btn remove_compare_item_ajax" data-id="{{ $product->id }}">{{ __('remove') }}</a>
                                         </div>
                                     </th>

@@ -33,11 +33,11 @@
 
             </div>
             <div class="price-box">
-                <span class="price">
+                <span class="price" style = "text-transform: lowercase!important;">
                     {{ float_amount_with_currency_symbol($price) }}
                 </span>
                 @if(!empty($product->price) && $product->price != 0)
-                <span class="price">
+                <span class="price"  style = "text-transform: lowercase!important;">
                     {{-- <del>{{ float_amount_with_currency_symbol($product->price) }}</del> --}}
                 </span>
                 @endif

@@ -58,7 +58,7 @@
                                     @endphp
                                     <td>
                                         <div class="price-box">
-                                            <span class="price">{{ float_amount_with_currency_symbol($price) }}</span>
+                                            <span class="price" style = "text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($price) }}</span>
                                         </div>
                                     </td>
                                     <td style="width:25%;">
@@ -71,7 +71,7 @@
                                     </td>
                                     <td>
                                         <div class="total">
-                                            <span class="price">{{ float_amount_with_currency_symbol($price * $cart_item['quantity']) }}</span>
+                                            <span class="price" style = "text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($price * $cart_item['quantity']) }}</span>
                                             <a href="#" class="remove_cart_item" data-id="{{ $cart_item['id'] }}" data-attr="{{ json_encode($cart_item['attributes']) }}">
                                                 <i class="las la-trash"></i>
                                             </a>

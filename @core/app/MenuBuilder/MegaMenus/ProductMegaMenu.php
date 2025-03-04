@@ -62,10 +62,10 @@ class ProductMegaMenu extends MegaMenuBase
         $campaign_percentage = !is_null($campaign_product) ? getPercentage($post->sale_price, $sale_price) : false;
         
             $price = $post->price == 0 ? __("Free") : float_amount_with_currency_symbol($post->price);
-            $output .= '<div class="price-wrap"><span class="price">' . float_amount_with_currency_symbol($sale_price) . '</span>';
+            $output .= '<div class="price-wrap"><span class="price"  style = "text-transform: lowercase!important;">' . float_amount_with_currency_symbol($sale_price) . '</span>';
             
             if ($deleted_price && $deleted_price > 0) {
-                 $output .= '<del>'.float_amount_with_currency_symbol($deleted_price) .'</del>';
+                 $output .= '<del  style = "text-transform: lowercase!important;">'.float_amount_with_currency_symbol($deleted_price) .'</del>';
             }
 
 

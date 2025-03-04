@@ -267,7 +267,7 @@ HTML;
 HTML;
 $badge_markup = !empty($item->badge) ? '<span class="sale">' . $item->badge . '</span>' : '';
 
-        $review_star = '<li class="price">';
+        $review_star = '<li class="price"  style = "text-transform: lowercase!important;">';
         for ($i=0; $i < round($item->rating_avg_rating); $i++) { 
             $review_star .= '<i class="las la-star icon"></i>';
         }
@@ -286,8 +286,8 @@ $badge_markup = !empty($item->badge) ? '<span class="sale">' . $item->badge . '<
                     <h3 class="product-title"><a href="{$route}">{$title}</a></h3>
                     <div class="product-price-details">
                         <ul class="list">
-                            <li class="price">{$sale_price}</li>
-                            <li class="price"><del>{$price}</del></li>
+                            <li class="price"  style = "text-transform: lowercase!important;"> {$sale_price}</li>
+                            <li class="price"  style = "text-transform: lowercase!important;"><del>{$price}</del></li>
                             {$review_star}
                         </ul>
                         {$hover_content}

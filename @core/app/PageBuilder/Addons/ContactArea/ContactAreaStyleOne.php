@@ -120,6 +120,7 @@ class ContactAreaStyleOne extends PageBuilderBase
         $padding_bottom = SanitizeInput::esc_html($all_settings['padding_bottom']);
         $custom_form_id = SanitizeInput::esc_html($all_settings['custom_form_id']);
         $title = SanitizeInput::esc_html($all_settings['title']);
+        // dd($title);
 
 
 
@@ -149,7 +150,7 @@ class ContactAreaStyleOne extends PageBuilderBase
         $output .= '</ul></div></div>'; //contact info column wrap
 
         if (!empty($custom_form_id)) {
-            $output .= '<div class="col-lg-6"> <div class="get-in-touch-wrapper"><h3 class="title">'.$title.'</h3>';
+            $output .= '<div class="col-lg-6"> <div class="get-in-touch-wrapper"><h3 class="title">'.__($title).'</h3>';
             $form_details = FormBuilder::find($custom_form_id);
             $output .= FormBuilderCustom::render_form(optional($form_details)->id,null,null,'boxed-btn');
             $output .= '</div></div>';
@@ -162,6 +163,7 @@ class ContactAreaStyleOne extends PageBuilderBase
     private function render_contact_item(int $index = null): string
     {
         $title = $this->get_repeater_field_value('title', $index);
+        $tran = __($title);
         $icon = $this->get_repeater_field_value('icon', $index);
         $description = $this->get_repeater_field_value('description', $index);
         $description = explode("\n",$description);
@@ -178,7 +180,7 @@ class ContactAreaStyleOne extends PageBuilderBase
         <i class="{$icon}"></i>
     </div>
     <div class="content">
-        <h5 class="title">{$title}</h5>
+        <h5 class="title">{$tran}</h5>
         {$description_markup}
     </div>
 </li>

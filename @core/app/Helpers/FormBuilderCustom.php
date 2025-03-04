@@ -16,6 +16,7 @@ class FormBuilderCustom
 
         $fields = self::render_fields($form_details->fields);
         $render_submit_button = self::render_submit_button($form_details->button_text,$button_class);
+        // dd($render_submit_button);
         $action = $action ?? route('frontend.form.builder.custom.submit');
         $rand = Str::random(10);
         return <<<HTML
@@ -56,9 +57,10 @@ HTML;
     private static function render_submit_button($text, $button_class = '') :string
     {
         $preloader = self::render_submit_preloader();
+        $tran = __($text);
         return <<<HTML
 <div class="form-group">
-    <button type="submit" class="default-btn {$button_class}">{$text}</button>
+    <button type="submit" class="default-btn {$button_class}">{$tran}</button>
     {$preloader}
 </div>
 HTML;

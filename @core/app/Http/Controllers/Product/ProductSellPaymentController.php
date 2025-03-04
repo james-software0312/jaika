@@ -89,11 +89,13 @@ class ProductSellPaymentController extends Controller
             // payment info
             'selected_payment_gateway' => 'nullable|string|max:191',
             'bank_payment_input' => 'required_if:selected_payment_gateway,==,bank_payment|file|mimes:jpg,jpeg,png,gif|max:11000',
-            'agree' => 'required',
+            // 'agree' => 'required',
             // if register
             'password' => 'sometimes|nullable|min:2|confirmed',
             'create_account' => 'nullable|string|max:191',
-        ], ['agree.required' => __('You need to agree to our Terms & Conditions to complete the order')]);
+        ], 
+        // ['agree.required' => __('You need to agree to our Terms & Conditions to complete the order')]
+    );
 
         // if no items in cart
         if (CartHelper::isEmpty()) {

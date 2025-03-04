@@ -310,9 +310,9 @@ HTML;
         $deleted_price = !is_null($campaign_product) ? $item->sale_price : $item->price;
         $campaign_percentage = !is_null($campaign_product) ? getPercentage($item->sale_price, $sale_price) : false;
 
-        $price_markup = '<ul class="list"><li class="price">' . float_amount_with_currency_symbol($sale_price) . '</li>';
+        $price_markup = '<ul class="list"><li class="price" style = "text-transform: lowercase!important;">' . float_amount_with_currency_symbol($sale_price) . '</li>';
         if ($deleted_price && $deleted_price > 0) {
-            $price_markup .= '<li class="price"><del>' . float_amount_with_currency_symbol($deleted_price) . '</del></li>';
+            $price_markup .= '<li class="price" style = "text-transform: lowercase!important;"><del>' . float_amount_with_currency_symbol($deleted_price) . '</del></li>';
         }
         $price_markup .= '</ul>';
 

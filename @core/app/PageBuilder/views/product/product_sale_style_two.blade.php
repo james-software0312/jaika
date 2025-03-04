@@ -53,8 +53,8 @@
                     <h4 class="sub-title">{{ $item->title }}</h4>
                     <p class="info">{{ $item->summary }}</p>
                     <div class="pricing-box">
-                        <p class="price">{{ float_amount_with_currency_symbol($sale_price) }}</p>
-                        <del>{{ float_amount_with_currency_symbol($deleted_price) }}</del>
+                        <p class="price" style = "text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($sale_price) }}</p>
+                        <del style = "text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($deleted_price) }}</del>
                     </div>
                     <div class="btn-wrapper">
                         @if (is_array($attributes) && count($attributes))

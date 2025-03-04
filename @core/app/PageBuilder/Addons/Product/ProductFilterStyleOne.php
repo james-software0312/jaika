@@ -247,9 +247,9 @@ HTML;
         $image_markup = render_image_markup_by_attachment_id($item->image, '', 'grid');
         $title_markup = "<h4 class='product-title'><a href='{$route}'>{$item->title}</a></h4>";
         // $price = $price > 0 ? float_amount_with_currency_symbol($price) : '';
-        $price_markup = '<div class="product-price-details"><ul class="list"><li class="price">' . float_amount_with_currency_symbol($sale_price) . '</li>';
+        $price_markup = '<div class="product-price-details"><ul class="list"><li class="price"  style = "text-transform: lowercase!important;">' . float_amount_with_currency_symbol($sale_price) . '</li>';
         if($price > $sale_price) {
-            $price_markup .= '<li class="price"><del>' . $price . '</del></li></ul></div>';
+            $price_markup .= '<li class="price"  style = "text-transform: lowercase!important;"><del>' . $price . '</del></li></ul></div>';
         } else {
             $price_markup .= '</ul></div>';
         }
