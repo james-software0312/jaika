@@ -125,6 +125,8 @@
                     $deleted_price = $campaign_product ? $product->sale_price : $product->price;
                     $campaign_percentage = $campaign_product ? getPercentage($product->sale_price, $sale_price) : false;
                     @endphp
+                    
+                    <div style="font-size:50px; color:#28a745;">{{ optional($product->inventory)->name; }}</div>
                     <div class="price-wrap">
                         <span class="price" data-main-price="{{ $sale_price }}" id="price" style = "text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($sale_price) }}</span>
                         {{-- @if(!empty($deleted_price) && $deleted_price != 0) --}}

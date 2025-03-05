@@ -61,12 +61,12 @@
                                         <div class="row">
                                             <div class="form-group col-lg-6 col-12">
                                                 <input type="text" class="form-control" id="exampleInputEmail1" name="username"
-                                                        aria-describedby="emailHelp" placeholder="User Name or Email"
+                                                        aria-describedby="emailHelp" placeholder="Nazwa użytkownika lub adres e-mail"
                                                 />
                                             </div>
                                             <div class="form-group col-lg-6 col-12">
                                                 <input type="password" class="form-control" id="exampleInputPassword1"
-                                                    name="password" placeholder="Password">
+                                                    name="password" placeholder="Hasło">
                                             </div>
                                         </div>
                                         <div class="form-group form-check">
@@ -75,7 +75,7 @@
                                                     <input type="checkbox" class="form-check-input" id="exampleCheck1" name="remember">
                                                     <label class="form-check-label" for="exampleCheck1">
                                                         {{-- {!! filter_static_option_value('remember_text', $setting_text, __('Remember me')) !!} --}}
-                                                        {!!__('Remember me') !!}
+                                                        {!!__('Remember Me') !!}
                                                     </label>
                                                 </div>
                                             </div>
@@ -111,13 +111,13 @@
                             </p>
                             <!-- discount coupon area -->
                             <div class="discount-coupon-area margin-bottom-50 margin-top-20 coupon_section d-none">
-                                <h4 class="title">{!! filter_static_option_value('coupon_title', $setting_text, __('coupon discount')) !!}</h4>
-                                <p class="info">
+                                <h4 class="title">{!!   __('coupon discount') !!}</h4>
+                                {{-- <p class="info">
                                     {!! __('There are many variations of passages of Lorem Ipsum available, but the
                                             majority have suffered alteration in some.'
                                             )
                                     !!}
-                                </p>
+                                </p> --}}
 
                                 <form action="{{ route('frontend.checkout.apply.coupon') }}" method="get" class="discount-coupon">
                                     <div class="form-group">
@@ -146,9 +146,10 @@
                                                 <option value="">{{ __('Select Country') }}</option>
                                                 @foreach ($countries as $country)
                                                     <option value="{{ $country->id }}" 
-                                                        @if(isset($user) && isset($user->country) 
+                                                        {{-- @if(isset($user) && isset($user->country) 
                                                             && $user->country == $country->id
-                                                        ) selected @endif
+                                                        ) selected @endif --}}
+                                                          @if($country->name == 'Poland') selected @endif 
                                                     >{{ $country->name }}</option>
                                                 @endforeach
                                             </select>

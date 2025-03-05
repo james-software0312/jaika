@@ -16,6 +16,7 @@ use App\PageBuilder\Fields\Textarea;
 use App\PageBuilder\Helpers\RepeaterField;
 use App\PageBuilder\Helpers\Traits\RepeaterHelper;
 use App\PageBuilder\PageBuilderBase;
+use App\Product\ProductCategory;
 
 class HeaderSliderTwo extends PageBuilderBase
 {
@@ -163,7 +164,7 @@ HTML;
         $im = $this->get_repeater_field_value('background_image', $index); 
         if($index == 0) $im = 907;
         else if($index == 1) $im =908;
-        // $background_image = render_background_image_markup_by_attachment_id($this->get_repeater_field_value('background_image', $index));
+        $background_image = render_background_image_markup_by_attachment_id($this->get_repeater_field_value('background_image', $index));
         $background_image = render_background_image_markup_by_attachment_id($im);
         $padding_top = SanitizeInput::esc_html($settings['padding_top']);
         $padding_bottom = SanitizeInput::esc_html($settings['padding_bottom']);
@@ -173,23 +174,102 @@ HTML;
             $icon_markup = !empty($button_icon) ? '<i class="'.$button_icon.'"></i>' : '';
             $button_markup = '<div class="btn-wrapper"> <a href="'.url($button_url).'" class="borderless-btn">'.$button_text.'</a></div>';
         }
+        // $categories = ProductCategory::all();
+        // Fetch all categories
+        $allCategories = ProductCategory::all();
+
+        // Build a nested structure
+        $categories = $this->buildCategoryTree($allCategories);
+        // dd($categories);
+        // dd($categories);
+        $category_html = $this->generate_category_tree_html($categories, null);
         return <<<HTML
-        <div class="header-area header-bg" {$background_image} data-padding-top="{$padding_top}" data-padding-bottom="{$padding_bottom}"> 
-            <div class="container nav-container">
-                <!-- <div class="row">
-                    <div class="col-lg-12">
-                        <div class="header-inner-content-index-02">
-                            <p class="info" style="color:{$title_color}">{$subtitle}</p>
-                            <h3 class="offer">{$title}</h3>
-                            {$button_markup}
-                        </div>
-                    </div>
-                </div> -->
-            </div>
+        <div class="header-area header-bg" {$background_image} > 
+
+            <!-- <div class = "row" style = "width:20%; background-color: red; height: 100%"> -->
+                <div style = "height:100%; background-color:white; width:20%; padding:20px;" class = "d-none d-lg-block">
+                    {$category_html}
+                </div>
+            <!-- </div> -->
         </div>
 HTML;
 
     }
 
+    private function generate_category_tree_html($categories, $selectedCat)
+    {
+        $html = '';
+        $html = '<form id="categoryForm" method="GET" action="'.route('frontend.products.all').'">';
+        foreach ($categories as $category) {
+            $isSelected = $this->isCategorySelected($category, $selectedCat);
+            $html .= '
+            <div id="accordion" style = "padding:10px;">
+                <div class="card p-0 border-0 custom-category-list" style = "width:90%;">
+                    <div class="card-header p-0" id="heading-'.$category->id.'">
+                        <h5 class="mb-0">
+                            <div class="single-checkbox-wrap" style = "padding:4px;">
+                              <label>
+                                <input type="radio" name="cat" class="radio" value="'.$category->id.'"
+                                    '.($selectedCat == $category->id ? 'checked' : '').' onchange="document.getElementById(\'categoryForm\').submit();">
+                                <span class="checkmark">'.$category->title.'</span>
+                            </label>';
 
+            if ($category->children->isNotEmpty()) {
+                $html .= '
+                    <button class="sub-category-btn py-0 px-0 m-0" data-toggle="collapse"
+                            data-target="#collapse-'.$category->id.'"
+                            aria-expanded="'.($isSelected ? 'true' : 'false').'"
+                            aria-controls="collapse-'.$category->id.'">
+                        +
+                    </button>';
+            }
+
+            $html .= '
+                            </div>
+                        </h5>
+                    </div>';
+
+            if ($category->children->isNotEmpty()) {
+                $html .= '
+                    <div id="collapse-'.$category->id.'" class="collapse '.($isSelected ? 'show' : '').'"
+                        aria-labelledby="heading-'.$category->id.'" data-parent="#accordion">
+                        <div class="card-body p-0">
+                            <div class="widget-check-box checkbox-catagory ml-4">
+                                '.$this->generate_category_tree_html($category->children, $selectedCat).'
+                            </div>
+                        </div>
+                    </div>';
+            }
+
+            $html .= '</div></div>';
+        }
+
+        return $html;
+    }
+
+    private function isCategorySelected($category, $selectedCat)
+    {
+        if ($category->id == $selectedCat) {
+            return true;
+        }
+
+        foreach ($category->children as $child) {
+            if ($this->isCategorySelected($child, $selectedCat)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function buildCategoryTree($categories, $parentId = null)
+    {
+        return $categories
+            ->where('parent_id', $parentId)
+            ->where('status', 'publish')
+            ->map(function ($category) use ($categories) {
+                $category->children = $this->buildCategoryTree($categories, $category->id);
+                return $category;
+            });
+    }
 }

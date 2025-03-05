@@ -71,7 +71,6 @@ class ProductSellPaymentController extends Controller
 
     public function checkout(Request $request)
     {
-        // dd(123);
         $this->validate($request, [
             // user info
             'name' => 'required|string|max:191',
@@ -96,6 +95,7 @@ class ProductSellPaymentController extends Controller
         ], 
         // ['agree.required' => __('You need to agree to our Terms & Conditions to complete the order')]
     );
+    // dd($request->bank_payment_input);
 
         // if no items in cart
         if (CartHelper::isEmpty()) {
@@ -248,7 +248,6 @@ class ProductSellPaymentController extends Controller
             $stockItem = StockItemModel::where('product_id',$product_id)->first();
             foreach ($product_variations as $key => $item) {
                 $ref        = $this->generatereference();
-                $show_ref        = $this->getNewShowReference('bank_transfer', date('Y-m-d'));
                 if (!empty($product)) {
                     SellOrderDetail::insert([
                         'stockitemid' => $stockItem->id,
@@ -261,12 +260,15 @@ class ProductSellPaymentController extends Controller
                         'updated_at' => Carbon::now(),
                         'unitid' => 2,
                         'reference' => $ref,
-
+                        
                     ]);
                 }
             }
             
         }
+        if($request->bank_payment_input == null) $payment_data = 'cash_on_delivery';
+        else $payment_data = 'bank_transfer';
+        $show_ref        = $this->getNewShowReference($payment_data, date('Y-m-d'));
         SellOrder::insert(([
             'warehouseid' => $stockItem->warehouseid,
             'selldate' => Carbon::now()->format('Y-m-d'),

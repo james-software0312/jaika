@@ -510,7 +510,7 @@
     "Bank Transfer Settings": "Ustawienia Przelewu Bankowego",
     "Basic Settings": "Ustawienia Podstawowe",
     "Basic Settings Update Success": "Aktualizacja Ustawień Podstawowych Powodzenie",
-    "Billing detail": "Szczegóły Rozliczeń",
+    "Billing detail": "Adres Wysyłki",
     "Billing Email": "Email Rozliczeniowy",
     "Billing Name": "Nazwa Rozliczeniowa",
     "Billing Summery": "Podsumowanie Rozliczeń",
@@ -579,7 +579,7 @@
     "Cheque Payment Logo": "Logo Płatności Czekiem",
     "Cheque Payment Name": "Nazwa Płatności Czekiem",
     "Cheque Payment Settings": "Ustawienia Płatności Czekiem",
-    "City/Town": "Miasto/Miasteczko",
+    "City/Town": "Miasto",
     "Clear Cache": "Wyczyść Pamięć Podręczną",
     "Clear cart": "Wyczyść Koszyk",
     "Clear Cart": "Wyczyść Koszyk",
@@ -820,8 +820,8 @@
     "From Date": "Od daty",
     "Frontend Words": "Słowa frontendowe",
     "Full Address": "Pełny adres",
-    "Full Name": "Pełne imię i nazwisko",
-    "Full name": "Pełne imię i nazwisko",
+    "Full Name": "imię i nazwisko",
+    "Full name": "imię i nazwisko",
     "Full Page Width": "Pełna szerokość strony",
     "Gallery Image": "Obraz z galerii",
     "GDPR Compliant Cookie Settings": "Ustawienia zgodne z RODO",
@@ -1152,7 +1152,7 @@
     "Paytm Merchant Key": "Klucz sprzedawcy Paytm",
     "Paytm Merchant Website": "Strona internetowa sprzedawcy Paytm",
     "Paytm Settings": "Ustawienia Paytm",
-    "PCS": "PCS",
+    "PCS": "szt",
     "Pending": "Oczekujące",
     "Pending Sale": "Oczekująca sprzedaż",
     "Percentage": "Procent",
@@ -1369,6 +1369,7 @@
     "Sidebar Position": "Pozycja Paska Bocznicowego",
     "Sidebar Visibility": "Widoczność Paska Bocznicowego",
     "sign in": "zaloguj się",
+    "Sign in": "Zaloguj się",
     "SIGN IN": "ZALOGUJ SIĘ",
     "Sign In": "Zaloguj się",
     "Sign in with Facebook": "Zaloguj się przez Facebooka",
@@ -1680,7 +1681,8 @@
     "Your Username or Password Is Wrong !!": "Twoja nazwa użytkownika lub hasło jest błędne !!",
     "your verification code is wrong, try again": "twój kod weryfikacyjny jest błędny, spróbuj ponownie",
     "your will get mail with all info of from to this email": "otrzymasz wiadomość e-mail ze wszystkimi informacjami na ten adres",
-    "Zone": "Strefa"
+    "Zone": "Strefa",
+    "Zip Code": "Kod pocztowy"
 
 
 }

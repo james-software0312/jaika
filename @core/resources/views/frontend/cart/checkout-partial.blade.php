@@ -27,7 +27,7 @@
                     {{ float_amount_with_currency_symbol($price) }}</span>
             </span>
             <span
-                class="same sub-amount">{{ float_amount_with_currency_symbol($price * $cart_item['quantity']) }}</span>
+                class="same sub-amount" style="text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($price * $cart_item['quantity']) }}</span>
         </div>
     @endforeach
 @endforeach
@@ -35,7 +35,7 @@
 <div class="sum-bar"></div>
 <div class="cost-name-amount sub-total-wrap">
     <span class="total">{!! __('sub total:') !!}:</span>
-    <span class="total-amount" id="subtotal" data-amount="{{ $subtotal }}">{{ float_amount_with_currency_symbol($subtotal) }}</span>
+    <span class="total-amount" id="subtotal" data-amount="{{ $subtotal }}" style="text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($subtotal) }}</span>
 </div>
 <div class="sum-bar"></div>
 @php
@@ -67,19 +67,19 @@
                     </small>
                 @endif
             </span>
-            <span class="same sub-amount">{{ float_amount_with_currency_symbol(optional($default_shipping->availableOptions)->cost ?? 0) }}</span>
+            <span class="same sub-amount" style="text-transform: lowercase!important;">{{ float_amount_with_currency_symbol(optional($default_shipping->availableOptions)->cost ?? 0) }}</span>
         </div>
         @endif
     </div>
     <div class="shipping-cost">
         <span class="total shipping">{!!  __('shipping:') !!}:</span>
-        <span class="total-amount" id="shipping_charge">{{ float_amount_with_currency_symbol($default_shipping_cost) }}</span>
+        <span class="total-amount" id="shipping_charge" style="text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($default_shipping_cost) }}</span>
     </div>
 </div>
 <div class="sum-bar"></div>
 <div class="cost-name-amount sub-total-wrap">
     <span class="total vat">{!! __('vat') !!}:</span>
-    <span class="total-amount">(+)<span id="tax_amount" data-tax-percentage="{{ $tax_percentage }}">{{ float_amount_with_currency_symbol($tax) }}</span></span>
+    <span class="total-amount">(+)<span id="tax_amount" data-tax-percentage="{{ $tax_percentage }}" style="text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($tax) }}</span></span>
 </div>
 <div id="discount_summery" style="display: none">
     <div class="sum-bar"></div>
@@ -87,7 +87,7 @@
         <span class="total discount">{!! __('discount') !!} 
         <span class="ex">{!!  __('coupon') !!}</span></span>
         <strong>
-            (-)<span class="total-amount" id="coupon_amount">
+            (-)<span class="total-amount" id="coupon_amount" style="text-transform: lowercase!important;">
                 {{ float_amount_with_currency_symbol($coupon_amount) }}
             </span>
         </strong>
@@ -98,7 +98,7 @@
     <span class="total"> {!! __('Total') !!}:</span>
     <span class="total-amount">
         <span class="ex"
-            id="total_amount">{{ float_amount_with_currency_symbol($total) }}</span>
+            id="total_amount" style="text-transform: lowercase!important;">{{ float_amount_with_currency_symbol($total) }}</span>
     </span>
 </div>
 <div class="sum-bar"></div>
