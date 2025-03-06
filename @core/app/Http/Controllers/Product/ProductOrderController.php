@@ -242,7 +242,9 @@ class ProductOrderController extends Controller
                         'image' => $product->image,  // Product image URL (optional)
                         'sold_count' => $product->sold_count,
                         'quantity' => $item['quantity'], // e.g., 2
-                        'total_price' => $product->sale_price * $item['quantity'], // e.g., 40.00 USD for 2 T-shirts
+                        'total_price' => $product->sale_price * $item['quantity'] + $product->sale_price, // e.g., 40.00 USD for 2 T-shirts
+                        'code' => $stockItem->code,
+                        'image' => $stockItem->photo,
                     ];
         
                     $product->sold_count += $item['quantity'];

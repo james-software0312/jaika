@@ -40,6 +40,7 @@ class PlaceOrder extends Mailable
                 'mail_message' => $this->message ?? 'You order has been placed',
                 'order_details' => $this->order_details,
                 'payment_meta' => optional($this->data)->payment_meta,
+                'data' => $this->data,
             ]);
 
         return $mail;

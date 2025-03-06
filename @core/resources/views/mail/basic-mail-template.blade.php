@@ -139,22 +139,32 @@ $default_lang = get_default_language();
                 @endif
             </a>
         </div>
+        <div>
+            <p>Dziękujemy za złożenie zamówienia w naszym sklepie WINGS Timber. Zrealizujemy je tak szybko, jak to możliwe. Potwierdzimy koszt i czas dostawy w osobnej wiadomości.
+                Jeśli masz jakiekolwiek pytania dotyczące swojego zamówienia, napisz do nas na adres wingstimber@wingstimber.com lub skontaktuj się z nami telefonicznie: +48 502 254 778.</p>
+        </div>
         <div class="inner-wrap">
             <h3>
                 {!! $data['message'] !!}
             </h3>
         </div>
         @if(array_key_exists('products', $data))
+        <p>{{ \Carbon\Carbon::now()->toFormattedDateString() }}</p>
             <div>
                 <table class="table table-default">
                     <thead>
+                        {{-- <div class="img-wrap max-width-100" style="width: 50px!important;">
+                            {!! render_image_markup_by_attachment_id($product['image'], '', 'grid') !!}
+                        </div> --}}
                         <tr>
-                            <th>Product</th>
-                            <th>Color</th>
-                            <th>Size</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
+                            <th>{{ __('Name') }}</th>
+                            <th>{{ __('Image') }}</th>
+                            <th>{{ __('Code') }}</th>
+                            <th>{{ __('Quantity') }}</th>
+                            <th>{{ __('unit price') }}</th>
+                            <th>{{ __('sub_total') }}</th>
+                            {{-- <th>Quantity</th>
+                            <th>Total</th> --}}
                         </tr>
                     </thead>
                     <tbody>

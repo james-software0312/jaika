@@ -87,9 +87,10 @@ class MapAreaStyleOne extends PageBuilderBase
     {
         $all_settings = $this->get_settings();
         $location = SanitizeInput::esc_html($all_settings['location']);
+        // dd($location);
         $location =  sprintf(
             '<div class="elementor-custom-embed"><iframe width="1080" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=%s&amp;t=m&amp;z=%d&amp;output=embed&amp;iwloc=near" aria-label="%s"></iframe></div>',
-            rawurlencode($location),
+            rawurlencode("ul. Nadrzeczna 16, 05-552 Wólka Kosowska"),
             10,
             $location
         );

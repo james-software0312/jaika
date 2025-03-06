@@ -48,7 +48,7 @@ class ProductSellPaymentController extends Controller
         else
             $sell_orders = SellOrder::where('selldate', '=', $date)->where('pre_order', '=', true)->get();
         $prefix = $this->setShowRefPrefix($payment_type);
-        $new_show_ref =  $prefix . "/" . date('d/m/Y', strtotime($date)). "/" . sprintf('%04d', count($sell_orders) + 1);
+        $new_show_ref =  $prefix . "/" . sprintf('%04d', count($sell_orders) + 1). "/" . date('d/m/Y', strtotime($date));
         return $new_show_ref;
     }
 
@@ -95,6 +95,7 @@ class ProductSellPaymentController extends Controller
         ], 
         // ['agree.required' => __('You need to agree to our Terms & Conditions to complete the order')]
     );
+    // dd($request->input());
     // dd($request->bank_payment_input);
 
         // if no items in cart
@@ -134,7 +135,7 @@ class ProductSellPaymentController extends Controller
         $selected_shipping_cost = $default_shipping_cost;
 
         $shipment_tax_applicable = false;
-
+        
         // if user selected a shipping option
         if (isset($request->selected_shipping_option)) {
             $shipping_is_valid = CartAction::validateSelectedShipping($request->selected_shipping_option, $request->coupon);
@@ -169,7 +170,6 @@ class ProductSellPaymentController extends Controller
             $shipment_tax_applicable = $shipping_info['is_taxable'];
         }
         $checkout_image_path = "";
-        
         // check if shipping is taxable
         if ($shipment_tax_applicable) {
             // if shipment is taxable (is_taxable), calculate tax with shipping
@@ -180,8 +180,9 @@ class ProductSellPaymentController extends Controller
             $tax_amount = CartAction::getCheckoutTaxAmount($subtotal, $request->country, $request->state);
         }
         
+        // $total = $subtotal + $selected_shipping_cost + $tax_amount - $coupon_amount + 0.23*($subtotal + $selected_shipping_cost + $tax_amount - $coupon_amount);
         $total = $subtotal + $selected_shipping_cost + $tax_amount - $coupon_amount;
-        
+        // $tax_amount = 0.23*($subtotal + $selected_shipping_cost + $tax_amount - $coupon_amount);
         $payment_meta = [
             'total' => (string) round($total, 2),
             'subtotal' => (string) round($subtotal, 2),
@@ -189,7 +190,6 @@ class ProductSellPaymentController extends Controller
             'tax_amount' => (string) round($tax_amount, 2),
             'coupon_amount' => (string) round($coupon_amount, 2),
         ];
-
         $product_sell_info = [
             // user
             'name' => $request->sanitize_html('name'),
@@ -265,9 +265,9 @@ class ProductSellPaymentController extends Controller
                 }
             }
             
+
         }
-        if($request->bank_payment_input == null) $payment_data = 'cash_on_delivery';
-        else $payment_data = 'bank_transfer';
+        $payment_data = $request->sanitize_html('selected_payment_gateway');
         $show_ref        = $this->getNewShowReference($payment_data, date('Y-m-d'));
         SellOrder::insert(([
             'warehouseid' => $stockItem->warehouseid,

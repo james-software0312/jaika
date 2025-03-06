@@ -140,6 +140,7 @@ class QuoteStyleOne extends PageBuilderBase
             $faq_markup .= $this->getFaqItem($index, $faq);
         }
 
+        $ask_question_form_title = __($ask_question_form_title);
     return <<<HTML
 <div class="faq-area-wrapper" data-padding-top="{$padding_top}" data-padding-bottom="{$padding_bottom}">
     <div class="container">
@@ -155,6 +156,7 @@ class QuoteStyleOne extends PageBuilderBase
             </div>
             <div class="col-lg-6">
                 <div class="ask-wrapper">
+                    <!-- <h4 class="title">{$ask_question_form_title}</h4> -->
                     <h4 class="title">{$ask_question_form_title}</h4>
                     {$custom_form_markup}
                 </div>

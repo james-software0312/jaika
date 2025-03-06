@@ -417,6 +417,7 @@ class FrontendController extends Controller
             'username' => 'required|string:max:191'
         ]);
         $user_info = User::where('username', $request->username)->orWhere('email', $request->username)->first();
+        // dd($user_info);
         if (!empty($user_info)) {
             $token_id = Str::random(30);
             $existing_token = DB::table('password_resets')->where('email', $user_info->email)->delete();
@@ -760,12 +761,15 @@ class FrontendController extends Controller
         $products = Product::whereIn('id', array_keys($all_cart_items))->get();
 
         $subtotal = CartAction::getCartTotalAmount($all_cart_items, $products);
+        // dd($subtotal);
         $subtotal_with_tax = $subtotal + $default_shipping_cost;
         $total = CartAction::calculateCoupon($request, $subtotal_with_tax, $products);
+        // dd($total)
         $coupon_amount = CartAction::calculateCoupon($request, $subtotal_with_tax, $products, 'DISCOUNT');
 
         $tax_data = CartAction::getDefaultTax($subtotal);
         $tax = $tax_data['tax'];
+        // $tax = 0.23*$subtotal;
         $tax_percentage = $tax_data['tax_percentage'];
 
         $setting_text = StaticOption::select('option_name', 'option_value')->whereIn('option_name', [

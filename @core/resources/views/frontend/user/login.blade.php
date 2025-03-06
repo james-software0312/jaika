@@ -181,7 +181,7 @@
                                             <label for="country">{{ __('Country') }}<span class="ex">*</span></label>
                                             <select id="country" class="form-control" name="country">
                                                 @foreach ($all_country as $country)
-                                                    <option value="{{ $country }}">{{ $country }}</option>
+                                                    <option value="{{ $country }}" @if ($country=='Poland') selected @endif>{{ $country }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -200,10 +200,11 @@
                                             <input type="password" name="password_confirmation" class="form-control" id="exampleInputPassword15">
                                         </div>
                                         <div class="form-group form-check col-12">
-                                            <input type="checkbox" class="form-check-input" name="business" id="business">
+                                            <input type="checkbox" class="form-check-input" name="business" id="business" checked>
                                             <label for="business">{{ __('Business') }}</label>
                                         </div>
-                                        <div class="business_form row">
+                                        <div class="business_form row" style="margin-left: 0!important;">
+                                            <div class="form-group col-lg-6 col-12"><label for="company">{{ __("Business") }}</label><input type="text" name="company" class="form-control" id="company"></div><div class="form-group col-lg-6 col-12"><label for="vat">{{ __("Vat_register") }}</label><input type="number" name="vat" class="form-control" id="vat"></div>
                                         </div>
                                         <div class="form-group form-check col-12">
                                             <input type="checkbox" class="form-check-input" name="agree_terms" id="Check11">
@@ -301,7 +302,7 @@
                 if ($(this).is(':checked')) {
                     // Checkbox is checked
                     console.log('Checkbox is checked');
-                    $('.business_form').html('<div class="form-group col-lg-6 col-12"><label for="company">{{ __("Company") }}</label><input type="text" name="company" class="form-control" id="company"></div><div class="form-group col-lg-6 col-12"><label for="vat">{{ __("Vat") }}</label><input type="number" name="vat" class="form-control" id="vat"></div>');
+                    $('.business_form').html('<div class="form-group col-lg-6 col-12"><label for="company">{{ __("Business") }}</label><input type="text" name="company" class="form-control" id="company"></div><div class="form-group col-lg-6 col-12"><label for="vat">{{ __("Vat_register") }}</label><input type="number" name="vat" class="form-control" id="vat"></div>');
                 } else {
                     // Checkbox is not checked
                     console.log('Checkbox is unchecked');

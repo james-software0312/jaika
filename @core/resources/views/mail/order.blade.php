@@ -156,7 +156,7 @@
 
             <div class="order_overview">
                 <h3>{{ __('Order Overview') }}</h3>
-                <table>
+                {{-- <table>
                     @if (!empty($payment_meta['subtotal']))
                         <tr>
                             <th>{{ __('Subtotal') }}</th>
@@ -181,7 +181,63 @@
                             <td>{{ float_amount_with_currency_symbol($payment_meta['total']) }}</td>
                         </tr>
                     @endif
-                </table>
+                </table> --}}
+                <div class="row" style="display: flex; justify-content: space-between; gap:15px; width:85%;">
+                    <div class="col-md-6">
+                        @if(auth()->check())
+                            <h4>{{ __('buyer_detail') }}</h4>
+                            <div>
+                                <span> {{ auth()->user()->name }}</span>
+                            </div>
+                            <div>
+                                <span> {{ auth()->user()->email }}</span>
+                            </div>
+                            <div>
+                                <span> {{ auth()->user()->address }}</span>
+                            </div>
+                            <div>
+                                <span>Tel: {{ auth()->user()->phone }}</span>
+                            </div>
+                        @else
+                            <h4>{{ __('buyer_detail') }}</h4>
+                            <div>
+                                <span> {{ $data['name']; }}</span>
+                            </div>
+                            <div>
+                                <span> {{ $data['email']; }}</span>
+                            </div>
+                            <div>
+                                <span> {{ $data['address'] }}</span>
+                            </div>
+                            <div>
+                                <span>Tel: {{ $data['phone'] }}</span>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="col-md-6">
+                        <h4>{{ __('shipper_detail') }}</h4>
+                        <div>
+                            <span> {{ $data['name']; }}</span>
+                        </div>
+                        <div>
+                            <span> {{ $data['email']; }}</span>
+                        </div>
+                        <div>
+                            <span> {{ $data['address'] }}</span>
+                        </div>
+                        <div>
+                            <span>Tel: {{ $data['phone'] }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>{{ __('Payment Method') }}</h4>
+                        <div>
+                            <span>{{ $data['payment_gateway'] }}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="order_details_container">
@@ -189,15 +245,13 @@
                 @if (count($order_details))
                     <table class="table table-default">
                         <thead>
-                            <th>{{ __('#') }}</th>
-                            <th>{{ __('Image') }}</th>
-                            <th>{{ __('Code') }}</th>
-                            <th>{{ __('Name') }}</th>
-                            <th>{{ __('Color') }}</th>
-                            <th>{{ __('Size') }}</th>
-                            <th>{{ __('Quantity') }}</th>
-                            <th>{{ __('Price') }}</th>
-                            <th>{{ __('Total') }}</th>
+                            <th style="width: 5%!important;">{{ __('#') }}</th>
+                            <th style="width: 30%!important;">{{ __('Position') }}</th>
+                            <th style="width: 10%!important;">{{ __('Image') }}</th>
+                            <th style="width: 25%!important;">{{ __('Code') }}</th>
+                            <th style="width: 5%!important;">{{ __('Quantity') }}</th>
+                            <th style="width: 10%!important;">{{ __('Price') }}</th>
+                            <th style="width: 15%!important;">{{ __('Total') }}</th>
                         </thead>
                         <tbody>
                             @foreach ($order_details as $key => $product)
@@ -205,14 +259,16 @@
                                 <tr>
                                     <th>{{ $key + 1 }}</th>
                                     <td>
+                                        <span> <b>{{ __('Name') }}</b>:&nbsp; {{ $product['name'] }}</span><br>
+                                        <span> <b>{{ __('Size') }}</b>:&nbsp; {{ $product['size'] }}</span><br>
+                                        <span> <b>{{ __('Color') }}</b>:&nbsp; {{ $product['color'] }}</span><br>
+                                    </td>
+                                    <td>
                                         <div class="img-wrap max-width-100" style="width: 50px!important;">
                                             {!! render_image_markup_by_attachment_id($product['image'], '', 'grid') !!}
                                         </div>
                                     </td>
                                     <td>{{ $product['code'] }}</td>
-                                    <td>{{ $product['name'] }}</td>
-                                    <td>{{ $product['size'] }}</td>
-                                    <td>{{ $product['color'] }}</td>
                                     <td>{{ $product['quantity'] }}</td>
                                     <td>{{ float_amount_with_currency_symbol($product['price']) }}</td>
                                     <td>{{ float_amount_with_currency_symbol($product['price'] * $product['quantity']) }}
@@ -220,9 +276,30 @@
                                 </tr>
                             @endforeach
                             <tr>
-                                <td colspan="3"></td>
-                                <td>{{ __('Subtotal') }}</td>
-                                <td>{{ float_amount_with_currency_symbol($total) }}</td>
+                                <td colspan="2"></td>
+                                <td colspan="3">{{ __('Subtotal') }}</td>
+                                <td colspan="2">{{ float_amount_with_currency_symbol($payment_meta['subtotal']) }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="3">{{ __('Shipping Cost') }}</td>
+                                <td colspan="2">{{ float_amount_with_currency_symbol($payment_meta['shipping_cost']) }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="3"> <b>{{ __('shipping_with_cost') }}</b></td>
+                                <td colspan="2"><b> {{ float_amount_with_currency_symbol($payment_meta['subtotal'] + $payment_meta['shipping_cost']) }}</b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="3">PTU PL (23%) (23%)</td>
+                                {{-- <td colspan="3">{{ __('Tax Amount') }}</td> --}}
+                                <td colspan="2">{{ float_amount_with_currency_symbol($payment_meta['tax_amount']) }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="3"> <b> {{ __('total_with_cost') }} </b</td>
+                                <td colspan="2"><b> {{ float_amount_with_currency_symbol($payment_meta['total']) }} </b> </td>
                             </tr>
                         </tbody>
                     </table>

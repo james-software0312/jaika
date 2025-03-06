@@ -32,10 +32,10 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="state">{{__('State')}}</label>
                 <select class="form-control" id="state" name="state">
-                    {{--          Check country select          --}}
+                             Check country select         
                     <option value="">Select Option</option>
                     @if(!empty($user_details->country))
                         @php
@@ -46,7 +46,7 @@
                         @endforeach
                     @endif
                 </select>
-            </div>
+            </div> --}}
             <div class="form-group">
                 <label for="city">{{__('City')}}</label>
                 <input type="text" class="form-control" id="city" name="city" value="{{$user_details->city}}">

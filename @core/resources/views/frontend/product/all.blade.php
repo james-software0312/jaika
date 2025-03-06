@@ -18,26 +18,26 @@
 
 @php
     $sidebar_visibility = !empty(get_static_option('sidebar_visibility'));
-    $product_section_width = $sidebar_visibility ? 'col-lg-9' : 'col-lg-12';
-    $sidebar_section_width = $sidebar_visibility ? 'col-lg-3' : 'col-lg-0';
+    $product_section_width = $sidebar_visibility ? 'col-lg-10' : 'col-lg-12';
+    $sidebar_section_width = $sidebar_visibility ? 'col-lg-2' : 'col-lg-0';
     $item_style = 'grid';
     if (isset(request()->s) && request()->s == 'list') {
         $item_style = 'list';
     }
 
-    $sidebar_position = get_static_option('sidebar_position') == 'right' ?: 'order-md-2';
+    $sidebar_position = get_static_option('sidebar_position') == 'right' ?: 'order-md-1';
 
     $product_column = 'col-md-3';
     $product_column_count = (int) get_static_option('shop_column_count');
     if ($product_column_count) {
         $col_class = 12 / $product_column_count;
-        $product_column = 'col-md-' . $col_class;
+        $product_column = 'col-md-2' ;
     }
 @endphp
 
 @section('content')
     <div class="shop-area-wrapper grid-only" id="shop">
-        <div class="container">
+        <div class="container-fluid" style="max-width: 1980px!important padding:20px!important;">
             <div class="row">
                 <div class="{{ $product_section_width }} {{ $sidebar_position }}">
                     <div class="toolbox-wrapper">
@@ -123,7 +123,7 @@
                     @endif
                 </div>
 
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <div class="widget-area-wrapper">
                         @if (get_static_option('shop_product_search'))
                             <div class="widget widget-search">

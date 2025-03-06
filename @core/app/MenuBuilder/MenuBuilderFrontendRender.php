@@ -43,7 +43,7 @@ class MenuBuilderFrontendRender
                     continue;
                 }
                 if($this->page_id == 4){
-                    $output .= '<li class = ""><a href="https://web.eska.tech/website/product">Produkt</a></li>';
+                    $output .= '<li class = ""><a href="https://web.eska.tech/website/product">Produkty</a></li>';
                     continue;
                 }
                 if($this->page_id !=177)$output .= $this->render_menu_item($menu_item,$this->page_id,$default_lang)  ;

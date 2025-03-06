@@ -126,6 +126,20 @@ class RegisterController extends Controller
 
     public function register(Request $request) {
         // dd($request->input());
+        // $this->validate($request, [
+        //     'username' => 'required|string|max:191|unique:users',
+        //     'name' => 'required|string|max:191',
+        //     'email' => 'required|string|max:191|unique:users',
+        //     'address' => 'nullable|string|max:191',
+        //     'zipcode' => 'nullable|string|max:191',
+        //     'company' => 'nullable|string|max:191',
+        //     'city' => 'nullable|string|max:191',
+        //     'state' => 'nullable|string|max:191',
+        //     'country' => 'nullable|string|max:191',
+        //     'phone' => 'nullable|string|max:191',
+        //     'password' => 'required|string|min:8|confirmed',
+        // ]);
+
         $this->validate($request, [
             'username' => 'required|string|max:191|unique:users',
             'name' => 'required|string|max:191',
@@ -138,7 +152,11 @@ class RegisterController extends Controller
             'country' => 'nullable|string|max:191',
             'phone' => 'nullable|string|max:191',
             'password' => 'required|string|min:8|confirmed',
+        ], [
+            'username.unique' => 'Nazwa użytkownika jest już zajęta.',
+            'email.unique' => 'Ten adres e-mail jest już zajęty.',
         ]);
+
         User::create([
             'username' => $request->username,
             'name' => $request->name,

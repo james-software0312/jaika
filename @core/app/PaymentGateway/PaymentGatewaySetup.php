@@ -99,6 +99,7 @@ class PaymentGatewaySetup
         $all_gateway = PaymentGatewaySetup::gateway_list();
 
         $output .= '<input type="hidden" name="selected_payment_gateway" value="' . get_static_option('site_default_payment_gateway') . '">';
+        $output .= '<span style="font-weight:bold;"> METODA PLATNOSCI </span>';
         $output .= '<ul>';
 
         if (!empty(get_static_option('cash_on_delivery_gateway'))) {
